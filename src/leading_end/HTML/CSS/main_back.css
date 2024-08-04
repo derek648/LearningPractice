@@ -1,15 +1,22 @@
+
 body{
-    background-color: #a297ad;
+    background-color: #F2F2F5FF;
 }
 
 .title_h1{
-    width: 200px;
-    margin:0 auto;
-    padding: 20px;
+    font-size:45px ;  /*字体大小*/
+    text-align: center;  /*文本对齐方式*/
+
 }
 
 .title_h4{
-    width: 200px;
-    margin:0 auto;
-    padding: 5px;
+    font-size:25px ;
+    text-align: center;
 }
+
+.button{
+    margin-bottom: 100px;
+    font-size:25px;
+}
+
+
