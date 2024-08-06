@@ -1,0 +1,27 @@
+.left_czw {
+    float: left;
+    width: 50px;
+    height: 740px;
+    background-color: lightskyblue;
+}
+
+.right_czw {
+    background-color: lightsteelblue;
+    margin-left: 60px;
+    height: 740px;
+}
+
+.iconup_czw {
+    background-color: darkkhaki;
+    margin-bottom: 10px;
+}
+
+.icondown1_czw {
+    background-color: darkkhaki;
+    margin-top: 250px;
+}
+
+.icondown2_czw {
+    background-color: darkkhaki;
+    margin-top: 10px;
+}

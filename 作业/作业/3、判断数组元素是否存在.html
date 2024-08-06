@@ -10,5 +10,24 @@
     <script>
         // 编写函数has(arr , 60) 判断数组中是否存在60这个元素，返回下标 考虑怎么返回才能区分不存在的情况
     </script>
+    <script>
+        function has(arr, target) {
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i] === target) {
+                    return i; // 找到目标元素，返回其下标
+                }
+            }
+            return -1; // 未找到目标元素，返回-1
+        }
+
+        // 示例
+        var myArray = [10, 20, 30, 40, 50, 60, 70];
+        var index = has(myArray, 60);
+        if (index !== -1) {
+            console.log("找到了，下标是：" + index);
+        } else {
+            console.log("没有找到元素60");
+        }
+    </script>
 </body>
 </html>

@@ -9,6 +9,7 @@
 <body>
 
 </body>
+<!--
 <script type="text/javascript">
     // 输出100-200之间所有的素数  (素数，就是除了1和自己本身，不能被别的数整除)
     // 提示 可以先确定一个数是否是素数  然后在找区间所有的
@@ -62,5 +63,37 @@
     false || j++;
     console.log(j)
 </script>
+-->
+    <script type="text/javascript">
+        // 定义一个函数来判断一个数是否为素数
+        function zs(num) {
+            // 从2开始到num-1，检查是否有任何数可以整除num
+            for (var i = 2; i < num; i++) {
+                if (num % i == 0) {
+                    // 如果找到一个数可以整除num，则num不是素数
+                    return false;
+                }
+            }
+            // 如果没有找到任何数可以整除num，则num是素数
+            return true;
+        }
+
+        // 遍历100到200之间的所有数字
+        for (var i = 100; i <= 200; i++) {
+            // 使用短路运算符简化代码，如果zs(i)为true，则打印出该数是素数
+            zs(i) && console.log(i + '是一个质数');
+        }
+
+        // 短路运算示例
+        var k = 20;
+        // 如果左边为假，则不执行右边的表达式
+        false && k++;
+        console.log(k); // 输出仍为20，因为k++没有被执行
+
+        var j = 10;
+        // 如果左边为真，则不执行右边的表达式
+        true || j++;
+        console.log(j); // 输出仍为10，因为j++没有被执行
+    </script>
 
 </html>

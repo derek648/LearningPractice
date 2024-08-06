@@ -23,5 +23,54 @@
             10      98      83	    77	
         */
     </script>
+    <script>
+        // 数据准备
+        var scores = [
+            { 学号: 1, 语文: 105, 数学: 62, 英语: 118 },
+            { 学号: 2, 语文: 89, 数学: 78, 英语: 120 },
+            { 学号: 3, 语文: 86, 数学: 64, 英语: 80 },
+            { 学号: 4, 语文: 78, 数学: 99, 英语: 91 },
+            { 学号: 5, 语文: 107.5, 数学: 97, 英语: 70 },
+            { 学号: 6, 语文: 112, 数学: 61, 英语: 92 },
+            { 学号: 7, 语文: 101, 数学: 79, 英语: 104 },
+            { 学号: 8, 语文: 71, 数学: 72, 英语: 105 },
+            { 学号: 9, 语文: 56, 数学: 68, 英语: 61 },
+            { 学号: 10, 语文: 98, 数学: 83, 英语: 77 }
+        ];
+
+        // 计算每个学生的总成绩
+        scores.forEach(function(student) {
+            student.总成绩 = student.语文 + student.数学 + student.英语;
+        });
+
+        // 按总成绩排序
+        scores.sort(function(a, b) {
+            return b.总成绩 - a.总成绩;
+        });
+
+        // 统计各单科成绩第一名
+        var chineseTop = scores.reduce(function(prev, current) {
+            return (prev.语文 > current.语文) ? prev : current;
+        });
+        var mathTop = scores.reduce(function(prev, current) {
+            return (prev.数学 > current.数学) ? prev : current;
+        });
+        var englishTop = scores.reduce(function(prev, current) {
+            return (prev.英语 > current.英语) ? prev : current;
+        });
+
+        // 输出总成绩排名
+        console.log("总成绩排名：");
+        scores.forEach(function(student) {
+            console.log("学号 " + student.学号 + "，总成绩 " + student.总成绩 + "分");
+        });
+
+        // 输出单科成绩第一名
+        console.log("单科成绩第一名：");
+        console.log("语文：学号 " + chineseTop.学号 + "，成绩 " + chineseTop.语文 + "分");
+        console.log("数学：学号 " + mathTop.学号 + "，成绩 " + mathTop.数学 + "分");
+        console.log("英语：学号 " + englishTop.学号 + "，成绩 " + englishTop.英语 + "分");
+
+    </script>
 </body>
 </html>
