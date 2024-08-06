@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" external-system-id="Maven" name="wenxin:war">
+    <output-path>$PROJECT_DIR$/wenxin/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>wenxin</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="wenxin.war">
+      <element id="artifact" artifact-name="wenxin:war exploded" />
+    </root>
+  </artifact>
+</component>
