@@ -14,9 +14,32 @@ body{
     text-align: center;
 }
 
-.button{
-    margin-bottom: 100px;
-    font-size:25px;
+.container {
+    position: fixed;
+    top: 300px; /* 保持垂直位置固定 */
+    left: 30vw; /* 使用视口宽度的30%来定位水平位置 */
+    /* 其他样式 */
+}
+
+/* 使用媒体查询调整小屏幕上的位置 */
+@media (max-width: 600px) {
+    .container {
+        left: 10vw; /* 在小屏幕上减少水平偏移 */
+    }
+}
+
+.button {
+    position: fixed;
+    right: 100px; /* 调整为更合理的值，比如100px */
+    bottom: 100px; /* 使用bottom而不是top和margin-bottom */
+    font-size: 25px;
+    /* 可以添加一些内边距或边框样式来美化按钮 */
+    padding: 10px 20px; /* 示例内边距 */
+    border: none; /* 去除默认边框 */
+    background-color: #007BFF; /* 示例背景色 */
+    color: white; /* 文本颜色 */
+    cursor: pointer; /* 鼠标悬停时显示指针 */
+    /* 你可以根据需要添加更多的样式 */
 }
 
 
