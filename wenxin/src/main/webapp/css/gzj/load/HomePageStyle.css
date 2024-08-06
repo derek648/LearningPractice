@@ -1,0 +1,47 @@
+/*左大框布局（包括工具栏及导航栏）*/
+#left_all{
+    width: 20%;
+    height: 100%;
+    float: left;
+}
+/*右大框布局（包括对话窗口及回答窗口）*/
+#right_all{
+    width: 79%;
+    height: 100%;
+    float: right;
+}
+
+/*leftBar(written by czw)*/
+#leftBar_czw{
+    /*background-color: #592fbb;*/
+    width: 20%;
+    height: 100%;
+    float: left;
+
+    /*width: 50px;*/
+    /*height: 740px;*/
+    background-color: lightskyblue;
+}
+
+/* leftMiddleBar style(written by gzj) */
+#leftMiddleBar_gzj {
+    background-image: linear-gradient(to bottom, #f0edf7, #e5e9f6);
+    width: 260px;
+    height: 100%;
+    float: right;
+}
+/* mainBack style(written by lgc) */
+#mainBack_lgc{
+    border: 1px solid #00c4ff;
+    background-color: #F2F2F5FF;
+}
+/* dialogBox style(written by gyt) */
+#dialogBox_gyt {
+    position: relative;
+    flex: 1;
+    background: linear-gradient(to bottom right, #dbe6fb, #f3f4f8);
+    background-size: cover;
+    background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+}
