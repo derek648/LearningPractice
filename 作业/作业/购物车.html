@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>购物车结算页面</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .item:hover {
+            background-color: #f0f0f0;
+        }
+        .item input[type="checkbox"] {
+            transform: scale(1.5);
+        }
+        #totalPrice {
+            color: #d44;
+            font-size: 1.5em;
+            font-weight: bold;
+            text-align: right;
+            margin-top: 20px;
+        }
+        .btn-checkout {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            border: none;
+            background-color: #5cb85c;
+            color: white;
+            text-align: center;
+            font-size: 1.2em;
+            cursor: pointer;
+        }
+        .btn-checkout:hover {
+            background-color: #4cae4c;
+        }
+    </style>
+    <script>
+        // 计算总价格的函数
+        function calculateTotal() {
+            var total = 0; // 初始化总价格
+            // 遍历所有商品
+            var items = document.getElementsByClassName('item');
+            for (var i = 0; i < items.length; i++) {
+                // 检查商品是否被选中
+                if (items[i].getElementsByTagName('input')[0].checked) {
+                    // 获取商品价格并累加到总价格
+                    var price = parseFloat(items[i].getElementsByTagName('span')[0].innerText);
+                    total += price;
+                }
+            }
+            // 显示总价格
+            document.getElementById('totalPrice').innerText = '￥' + total.toFixed(2);
+        }
+
+        // 全选或全不选的函数
+        function toggleSelectAll(source) {
+            var checkboxes = document.getElementsByClassName('item-check');
+            for (var i = 0; i < checkboxes.length; i++) {
+                checkboxes[i].checked = source.checked;
+            }
+            calculateTotal();
+        }
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <h2>购物车结算</h2>
+
+    <table>
+        <tr>
+            <th><input type="checkbox" onclick="toggleSelectAll(this)" id="selectAll"></th>
+            <th>商品名称</th>
+            <th>价格</th>
+        </tr>
+        <tr class="item">
+            <td><input type="checkbox" class="item-check" onclick="calculateTotal()"></td>
+            <td>商品1</td>
+            <td><span>99.99</span></td>
+        </tr>
+        <tr class="item">
+            <td><input type="checkbox" class="item-check" onclick="calculateTotal()"></td>
+            <td>商品2</td>
+            <td><span>199.99</span></td>
+        </tr>
+        <tr class="item">
+            <td><input type="checkbox" class="item-check" onclick="calculateTotal()"></td>
+            <td>商品3</td>
+            <td><span>299.99</span></td>
+        </tr>
+        <!-- 更多商品可以在此添加 -->
+    </table>
+
+    <div id="totalPrice">￥0.00</div>
+
+    <button class="btn-checkout">去结算</button>
+</div>
+
+</body>
+</html>
