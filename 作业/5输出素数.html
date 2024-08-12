@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prime Numbers and Short-circuiting</title>
+</head>
+<body>
+    <h1>100到200之间的素数：</h1>
+    <ul id="prime-list"></ul>
+
+    <script type="text/javascript">
+        // 函数：检查一个数是否为素数
+        function isPrime(num) {
+            if (num <= 1) {
+                return false; // 素数必须大于1
+            }
+            for (var i = 2; i <= Math.sqrt(num); i++) {
+                if (num % i === 0) {
+                    return false; // 如果能被整除，则不是素数
+                }
+            }
+            return true; // 如果除了1和它本身没有其他因子，则是素数
+        }
+
+        // 打印100到200之间的所有素数
+        function printPrimeNumbers(start, end) {
+            var primeList = document.getElementById("prime-list");
+
+            for (var i = start; i <= end; i++) {
+                if (isPrime(i)) {
+                    var li = document.createElement("li");
+                    li.textContent = i + ' 是一个素数';
+                    primeList.appendChild(li);
+                }
+            }
+        }
+
+        var k = 20;
+        false && (k++); // 左侧是false，所以右侧不会执行
+        console.log("k的值:", k); // 输出: 20
+        
+        var j = 10;
+        false || (j++); // 左侧是false，所以右侧会执行
+        console.log("j的值:", j); // 输出: 11
+
+        // 调用函数打印素数
+        printPrimeNumbers(100, 200);
+    </script>
+</body>
+</html>
+

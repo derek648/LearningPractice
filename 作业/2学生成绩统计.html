@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>成绩统计</title>
+</head>
+<body>
+    <div id="output"></div> <!-- Added a div to display the results -->
+
+    <script>
+        // 成绩表数据
+        var scores = [
+            { id: 1, chinese: 105, math: 62, english: 118 },
+            { id: 2, chinese: 89, math: 78, english: 120 },
+            { id: 3, chinese: 86, math: 64, english: 80 },
+            { id: 4, chinese: 78, math: 99, english: 91 },
+            { id: 5, chinese: 107.5, math: 97, english: 70 },
+            { id: 6, chinese: 112, math: 61, english: 92 },
+            { id: 7, chinese: 101, math: 79, english: 104 },
+            { id: 8, chinese: 71, math: 72, english: 105 },
+            { id: 9, chinese: 56, math: 68, english: 61 },
+            { id: 10, chinese: 98, math: 83, english: 77 }
+        ];
+
+        // 计算每个学生的总成绩
+        scores.forEach(student => {
+            student.total = student.chinese + student.math + student.english;
+        });
+
+        // 按总成绩降序排序
+        scores.sort((a, b) => b.total - a.total);
+
+        // 准备输出结果
+        var output = '';
+
+        // 输出按总成绩排名
+        output += '<h2>学生总成绩排名：</h2>';
+        scores.forEach((student, index) => {
+            output += `<p>${index + 1}. 学号: ${student.id}, 总成绩: ${student.total}</p>`;
+        });
+
+        // 统计各单科成绩第一名
+        function findTopScorer(subject) {
+            return scores.reduce((topStudent, currentStudent) => {
+                return currentStudent[subject] > topStudent[subject] ? currentStudent : topStudent;
+            });
+        }
+
+        // 找到各科最高分学生
+        var topChinese = findTopScorer('chinese');
+        var topMath = findTopScorer('math');
+        var topEnglish = findTopScorer('english');
+
+        // 输出单科最高分及学号
+        output += '<h2>各科成绩第一名：</h2>';
+        output += `<p>语文最高分: 学号 ${topChinese.id}, 成绩 ${topChinese.chinese}</p>`;
+        output += `<p>数学最高分: 学号 ${topMath.id}, 成绩 ${topMath.math}</p>`;
+        output += `<p>英语最高分: 学号 ${topEnglish.id}, 成绩 ${topEnglish.english}</p>`;
+
+        // 将结果显示在页面上
+        document.getElementById('output').innerHTML = output;
+
+        // 输出结果到控制台
+        console.log("按总成绩排名:");
+        scores.forEach((student, index) => {
+            console.log(`${index + 1}. 学号: ${student.id}, 总成绩: ${student.total}`);
+        });
+
+        console.log("单科成绩第一名:");
+        console.log(`语文最高分: 学号 ${topChinese.id}, 成绩 ${topChinese.chinese}`);
+        console.log(`数学最高分: 学号 ${topMath.id}, 成绩 ${topMath.math}`);
+        console.log(`英语最高分: 学号 ${topEnglish.id}, 成绩 ${topEnglish.english}`);
+    </script>
+</body>
+</html>
