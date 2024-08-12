@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script type="text/javascript">
+    // 输出100-200之间所有的素数  (素数，就是除了1和自己本身，不能被别的数整除)
+    // 提示 可以先确定一个数是否是素数  然后在找区间所有的
+    // 确定一个数是否为素数时可以使用假设法
+
+    for (var num = 100; num <= 200; num++) {
+        var flag = true;
+        for (var i = 2; i < num; i++) {
+            if (num % i == 0) {
+                flag = false;
+                break;
+            }
+        }
+        if (flag) {
+            console.log(num + '是质数')
+        }
+    }
+
+    for (var i = 100; i <= 200; i++) {
+        // if (zs(i)) {
+        //     console.log(i + '是一个质数')
+        // }
+        zs(i) && console.log(i + '是一个质数');
+    }
+
+
+    // 判断一个数是不是质数 num形参表示要验证的数 返回值 true表示是 false 表示否
+    function zs(num) {
+        for (var i = 2; i < num; i++) {
+            if (num % i == 0) {
+                // 如果有一次条件可以满足 绝对可以证明 当前这个数不是质数 所以返回结果 (后面的代码就不会在执行)
+                return false;
+            }
+        }
+        // 当代码走到这一行 绝对证明 前面循环过程中一次if条件都没有满足 证明目前的是质数
+        return true;
+    }
+
+
+
+
+    // 短路运算
+    // && 并且 两个都为真最终结果为真 只要有一个为假 最终结果为假
+    // 如果左边的是false 整个表达式 可以得到结果 此时就不会继续执行右边的代码 这种情况叫做短路 可以使用短路运算简化  if语句
+    var k = 20;
+    false && k++;//左边为真 执行右边  左边为假 不执行右边 等价于 写 if(true){做什么}
+    console.log(k)
+    
+    // ||  只要有一个为真 最终结果为真  如果左边的是真 右边没有执行的必要了
+    var j = 10;
+    false || j++;
+    console.log(j)
+</script>
+
+</html>

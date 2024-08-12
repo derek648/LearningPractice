@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Document</title>
+	</head>
+	<body>
+		<script>
+			/*
+            以下是某班级一次考试的成绩表。请计算每个学生总成绩，并按总成绩排名。统计各单科成绩第一名，输出其成绩与学号
+            学号    语文    数学    英语	总成绩	备注
+            1   ,    105   ,  62  ,    118		
+            2   ,    89    ,  78	 ,   120		
+            3   ,    86    ,  64	 ,   80		
+            4   ,    78    ,  99	 ,   91		
+            5   ,    107.5 ,  97	 ,   70		
+            6   ,    112   ,  61	 ,   92		
+            7   ,    101   ,  79	 ,   104		
+            8   ,    71    ,  72	 ,   105		
+            9   ,    56    ,  68	 ,   61		
+            10  ,    98    ,  83	 ,   77	
+        */
+			// 存储学生成绩到二维矩阵中
+			let scores = [
+				[1, 105, 62, 118],
+				[2, 89, 78, 120],
+				[3, 86, 64, 80],
+				[4, 78, 99, 91],
+				[5, 107.5, 97, 70],
+				[6, 112, 61, 92],
+				[7, 101, 79, 104],
+				[8, 71, 72, 105],
+				[9, 56, 68, 61],
+				[10, 98, 83, 77]
+			]
+			// 计算总成绩并加到第5栏内
+			for (let i = 0; i < scores.length; i++) {
+				let sum = 0;
+				for (let j = 1; j < scores[i].length; j++) {
+					sum += scores[i][j];
+				}
+				scores[i].push(sum);
+			}
+
+			// 总成绩排名并输出
+			scores.sort(function(a, b) {
+				return b[4] - a[4]
+			})
+			console.log("总成绩排名：");
+			for (let i = 0; i < scores.length; i++) {
+				console.log(`学号： ${scores[i][0]}, 总成绩： ${scores[i][4]}`);
+			}
+
+			//计算各单科第一
+			function firstGrade(scores, colum,subject) {
+				let Max = scores[0][colum];
+				let id = 1;
+				for (let i = 1; i < scores.length; i++) {
+					if (Max < scores[i][colum]) {
+						Max = scores[i][colum];
+						id = scores[i][0];
+					}
+				}
+				console.log(subject+"第一名：学号"+id+",成绩："+Max+"\n");
+			}
+			// 计算语文第一名
+			firstGrade(scores,1,"语文")
+			// 计算数学第一名
+			firstGrade(scores,2,"数学")
+			// 计算英语第一名
+			firstGrade(scores,3,"英语")
+		</script>
+	</body>
+</html>
