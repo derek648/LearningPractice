@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /**
+         * 首先创建一个包含1-33数字的数组
+         * 然后使用一个循环来生成6个不重复的红球号码。
+         * 对于蓝球号码，我们直接使用Math.random()函数生成一个1-16之间的随机整数。
+         * 最后，我们打印出生成的号码到控制台。
+         * */
+        function generateLotteryNumbers() {
+            // 创建一个包含1-33数字的数组
+            let numbers = Array.from({ length: 33 }, (_, i) => i + 1);
+
+            // 生成6个不重复的红球号码
+            let redBalls = [];
+            while (redBalls.length < 6) {
+                let randomIndex = Math.floor(Math.random() * numbers.length);
+                let randomNumber = numbers[randomIndex];
+                if (redBalls.indexOf(randomNumber) === -1) {
+                    redBalls.push(randomNumber);
+                }
+            }
+
+            // 生成1个蓝球号码
+            let blueBall = Math.floor(Math.random() * 16) + 1;
+
+            // 返回生成的号码
+            return {
+                redBalls: redBalls,
+                blueBall: blueBall
+            };
+        }
+
+        // 生成号码并打印到控制台
+        let lotteryNumbers = generateLotteryNumbers();
+        console.log("红球号码:", lotteryNumbers.redBalls);
+        console.log("蓝球号码:", lotteryNumbers.blueBall);
+        // 生成双色球数字  红球6个 是1-33之间的数字 并且不能重复出现 蓝球1个 为1-16的数字
+    </script>
+</body>
+</html>

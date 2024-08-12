@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="goods.css">
+    <style>
+        .selected {
+            font-weight: bold;
+            color: #ff0000;
+        }
+    </style>
+</head>
+
+<body>
+<div class="goodsinfo">
+    价格:<span id="price">0</span>
+    <form action="" class="choose">
+        <ul id="optionsList">
+            <!-- 选项将在这里动态生成 -->
+        </ul>
+    </form>
+</div>
+<script>
+    let data = [
+        {
+            "id": 6,
+            "goodsSku": {
+                "颜色": "白色",
+                "内存": "2G"
+            },
+            "price": 100
+        },
+        {
+            "id": 7,
+            "goodsSku": {
+                "颜色": "白色",
+                "内存": "4G"
+            },
+            "price": 200
+        },
+        {
+            "id": 8,
+            "goodsSku": {
+                "颜色": "黑色",
+                "内存": "2G"
+            },
+            "price": 300
+        },
+        {
+            "id": 9,
+            "goodsSku": {
+                "颜色": "黑色",
+                "内存": "4G"
+            },
+            "price": 400
+        }
+    ];
+
+    function generateOptions() {
+        let optionsList = document.getElementById('optionsList');
+        optionsList.innerHTML = ''; // 清空现有列表
+
+        let options = {
+            "颜色": new Set(),
+            "内存": new Set()
+        };
+
+        // 整理选项
+        data.forEach(function(item) {
+            options["颜色"].add(item.goodsSku.颜色);
+            options["内存"].add(item.goodsSku.内存);
+        });
+
+        // 生成颜色选项
+        let colorLi = document.createElement('li');
+        colorLi.className = 'product';
+        let colorDl = document.createElement('dl');
+        let colorDt = document.createElement('dt');
+        colorDt.textContent = '颜色：';
+        let colorDd = document.createElement('dd');
+        options["颜色"].forEach(function(color) {
+            let colorA = document.createElement('a');
+            colorA.href = 'javascript:void(0);';
+            colorA.textContent = color;
+            colorA.onclick = function() {
+                selectOption(color, '颜色');
+            };
+            colorDd.appendChild(colorA);
+        });
+        colorDl.appendChild(colorDt);
+        colorDl.appendChild(colorDd);
+        colorLi.appendChild(colorDl);
+        optionsList.appendChild(colorLi);
+
+        // 生成内存选项
+        let memoryLi = document.createElement('li');
+        memoryLi.className = 'product';
+        let memoryDl = document.createElement('dl');
+        let memoryDt = document.createElement('dt');
+        memoryDt.textContent = '内存：';
+        let memoryDd = document.createElement('dd');
+        options["内存"].forEach(function(memory) {
+            let memoryA = document.createElement('a');
+            memoryA.href = 'javascript:void(0);';
+            memoryA.textContent = memory;
+            memoryA.onclick = function() {
+                selectOption(memory, '内存');
+            };
+            memoryDd.appendChild(memoryA);
+        });
+        memoryDl.appendChild(memoryDt);
+        memoryDl.appendChild(memoryDd);
+        memoryLi.appendChild(memoryDl);
+        optionsList.appendChild(memoryLi);
+    }
+
+    // 选择选项并更新价格
+    function selectOption(value, type) {
+        let siblings = document.querySelectorAll('.' + type + ' a');
+        siblings.forEach(function(sibling) {
+            sibling.classList.remove('selected');
+        });
+        event.target.classList.add('selected');
+
+        // 更新价格
+        updatePrice();
+    }
+
+    // 更新价格
+    function updatePrice() {
+        let selectedColor = document.querySelector('.颜色 a.selected').textContent;
+        let selectedMemory = document.querySelector('.内存 a.selected').textContent;
+        data.forEach(function(item) {
+            if (item.goodsSku.颜色 === selectedColor && item.goodsSku.内存 === selectedMemory) {
+                document.getElementById('price').textContent = item.price;
+            }
+        });
+    }
+
+    // 初始化选项
+    generateOptions();
+</script>
+</body>
+
+</html>

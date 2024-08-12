@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #pagination {
+            list-style-type: none;
+            padding: 0;
+        }
+        #pagination li {
+            display: inline-block;
+            margin-right: 5px;
+            cursor: pointer;
+        }
+        #pagination li.active {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="data-container">
+        <!-- 数据将在这里显示 -->
+    </div>
+
+    <ul id="pagination">
+        <!-- 分页按钮将在这里生成 -->
+    </ul>
+
+    <script>
+        let data = []; // 已有的数据
+        let total = 101; // 数据总条数
+        let perPage = 10; // 每页显示的条数
+
+        // 初始化数据
+        for (let i = 1; i <= total; i++) {
+            data.push('我是第' + i + '条数据');
+        }
+
+        // 生成分页导航
+        function generatePagination() {
+            let paginationContainer = document.getElementById('pagination');
+            paginationContainer.innerHTML = ''; // 清空分页容器
+
+            let pageCount = Math.ceil(total / perPage); // 计算总页数
+
+            for (let i = 1; i <= pageCount; i++) {
+                let li = document.createElement('li');
+                li.textContent = i;
+                li.onclick = function(page) {
+                    return function() {
+                        changePage(page);
+                    };
+                }(i);
+                paginationContainer.appendChild(li);
+            }
+        }
+
+        // 切换页面并显示数据
+        function changePage(page) {
+            let startIndex = (page - 1) * perPage;
+            let endIndex = startIndex + perPage;
+            let pageData = data.slice(startIndex, endIndex);
+
+            let dataContainer = document.getElementById('data-container');
+            dataContainer.innerHTML = ''; // 清空数据容器
+
+            pageData.forEach(function(item) {
+                let div = document.createElement('div');
+                div.textContent = item;
+                dataContainer.appendChild(div);
+            });
+
+            // 更新分页按钮的激活状态
+            let paginationItems = document.querySelectorAll('#pagination li');
+            paginationItems.forEach(function(item) {
+                item.classList.remove('active');
+            });
+            paginationItems[page - 1].classList.add('active');
+        }
+
+        // 初始化分页并显示第一页数据
+        generatePagination();
+        changePage(1);
+    </script>
+</body>
+
+</html>

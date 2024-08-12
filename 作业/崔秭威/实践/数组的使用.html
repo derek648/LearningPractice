@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>array</title>
+</head>
+<body>
+    <script>
+        let arr1=['a','b','c','d','e','f'];
+        arr1.push('g');
+        console.log(arr1);
+        console.log(arr1.pop());
+        arr1.unshift('h');
+        console.log(arr1);
+        console.log(arr1.shift());
+        for(let i=0;i<arr1.length;i++) {
+            console.log(arr1[i]);
+        }
+        let arr2=[1,2,10,23,15,135,14,28,41,72];
+        //从大到小排序，因为sort方法默认按照字符串排序
+        arr2.sort(function (a,b) {
+            return b-a;
+        })
+        console.log(arr2);
+        //从小到大排序
+        arr2.sort(function (a,b) {
+            return a-b;
+        })
+        //splice方法，第一个数字表示操作位置，第二个数字表示删除个数，第三个位置以后的位置表示添加的元素
+        //删除0个元素即为添加元素
+        console.log(arr2);
+        let arr3=['a','b','c'];
+        arr3.splice(3,0,'f');
+        //删除元素
+        console.log(arr3);
+        arr3.splice(0,1);
+        console.log(arr3);
+        //先删后加即为修改操作
+        arr3.splice(0,1,'e');
+        console.log(arr3);
+        //reverse方法，将数组翻转，会改变原数组
+        let arr4=['a','b','c'];
+        arr4.reverse();
+        console.log(arr4);
+        //concat数组拼接，不会改变原数组
+        let res=arr4.concat('d','e');
+        console.log(res);
+        //join使用符号将数组中的每一个元素拼接起来，不会改变原数组
+        console.log(arr4.join('-'));
+
+    </script>
+</body>
+</html>
