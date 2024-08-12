@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数组处理示例</title>
+</head>
+<body>
+    <script>
+        // 创建一个包含30个偶数的数组
+        const evenNumbersArray = generateEvenNumbersArray(30);
+        const groupSize = 5;  // 每组的大小
+
+        // 计算每五个数的平均值并存储在数组中
+        const averageArray = calculateAverages(evenNumbersArray, groupSize);
+
+        // 打印原始数组和平均数数组
+        printArray("从2开始的偶数数组:", evenNumbersArray);
+        printArray("每五个数的平均值数组:", averageArray);
+
+        /**
+         * 生成包含指定数量偶数的数组
+         * @param {number} count - 数组中偶数的数量
+         * @returns {Array} - 包含偶数的数组
+         */
+        function generateEvenNumbersArray(count) {
+            const startNumber = 2;  // 起始的偶数
+            const evenArray = [];
+            for (let i = 0; i < count; i++) {
+                evenArray.push(startNumber + (i * 2));
+            }
+            return evenArray;
+        }
+
+        /**
+         * 计算给定数组中每组指定大小的平均值
+         * @param {Array} numbersArray - 要处理的数字数组
+         * @param {number} size - 每组的大小
+         * @returns {Array} - 包含每组平均值的数组
+         */
+        function calculateAverages(numbersArray, size) {
+            const avgArray = [];
+            for (let i = 0; i < numbersArray.length; i += size) {
+                const currentGroup = numbersArray.slice(i, i + size);
+                const sum = currentGroup.reduce((acc, val) => acc + val, 0);
+                avgArray.push(sum / currentGroup.length);
+            }
+            return avgArray;
+        }
+
+        /**
+         * 打印数组到控制台和页面
+         * @param {string} label - 数组的标签
+         * @param {Array} array - 要打印的数组
+         */
+        function printArray(label, array) {
+            console.log(label, array);
+            document.body.insertAdjacentHTML('beforeend', `<p>${label} ${JSON.stringify(array)}</p>`);
+        }
+    </script>
+</body>
+</html>
