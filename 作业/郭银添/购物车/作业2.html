@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>拖拽效果</title>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+			integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"
+			defer></script>
+		<style>
+			button {
+				width: 10px;
+				height: 20px;
+			}
+
+			span,
+			#price {
+				color: red;
+			}
+
+			p {
+				display: inline;
+			}
+		</style>
+	</head>
+	<body>
+		<table border="1px" width="80%">
+			<caption>购物清单</caption>
+			<tr>
+				<th><input type="checkbox" id="selectAll" /></th>
+				<th>商品名称</th>
+				<th>数量</th>
+				<th>单价（元）</th>
+				<th>金额（元）</th>
+				<th>操作</th>
+			</tr>
+			<tr class="item">
+				<td><input type="checkbox" id="selectFirst" /></td>
+				<td>电视机</td>
+				<td>
+					<button>-</button>
+					<p>1</p>
+					<button>+</button>
+				</td>
+				<td>200</td>
+				<td id="price">200</td>
+				<td>删除</td>
+			</tr>
+			<tr class="item">
+				<td><input type="checkbox" id="selectSecond" /></td>
+				<td>洗衣机</td>
+				<td>
+					<button>-</button>
+					<p>1</p>
+					<button>+</button>
+				</td>
+				<td>150</td>
+				<td id="price">150</td>
+				<td>删除</td>
+			</tr>
+			<tr class="item">
+				<td><input type="checkbox" id="selectThird" /></td>
+				<td>电视机</td>
+				<td>
+					<button>-</button>
+					<p>1</p>
+					<button>+</button>
+				</td>
+				<td>100</td>
+				<td id="price">100</td>
+				<td>删除</td>
+			</tr>
+			<tr>
+				<td>删除所选商品</td>
+				<td>继续购物</td>
+				<td colspan="3">
+					<span id="merchandiseNumbers">0</span>件商品总计<span>￥</span><span id="merchandisePrices">0</span>
+				</td>
+				<td></td>
+				<td></td>
+				<td>去结算</td>
+			</tr>
+		</table>
+	</body>
+
+	<script>
+		// 点击全选/全删按钮
+		let selectAll = document.querySelector("#selectAll");
+		let selectFirst = document.querySelector("#selectFirst");
+		let selectSecond = document.querySelector("#selectSecond");
+		let selectThird = document.querySelector("#selectThird");
+
+		//添加点击事件，监控复选框内容是否修改
+		selectAll.addEventListener('change', function() {
+			if (selectAll.checked) {
+				selectFirst.checked = true;
+				selectSecond.checked = true;
+				selectThird.checked = true;
+			} else {
+				selectFirst.checked = false;
+				selectSecond.checked = false;
+				selectThird.checked = false;
+			}
+		})
+
+		//添加事件，当点击加号减号时，增加或减少金额
+		let buttons = document.querySelectorAll('button');
+		buttons.forEach(function(button) {
+			button.addEventListener('click', function() {
+				//获取button当前的数量
+				let number = parseInt(button.parentNode.childNodes[3].innerText)
+				//获取button当前的价格
+				let price = button.parentNode.nextElementSibling.innerText
+				//获取button当前的总价
+				let totallPrices = button.parentNode.nextElementSibling.nextElementSibling.innerText
+				//获取当前复选框是否被选中
+				let checkbox = button.parentNode.previousSibling.previousSibling.previousSibling
+					.previousSibling.childNodes[0].checked
+				if (button.innerText == '-') {
+					--number;
+					if (!number) {
+						alert("最小数量为1");
+						return;
+					}
+					button.parentNode.childNodes[3].innerText = number
+					let currentPrice = changePrice(price, number)
+					// 修改当前的总价
+					button.parentNode.nextElementSibling.nextElementSibling.innerText = currentPrice
+
+					//如果复选框被选中，则修改对于的商品数量
+					if (checkbox) {
+						let merchandiseNumbers = parseInt(document.querySelector("#merchandiseNumbers")
+							.innerText)
+						document.querySelector("#merchandiseNumbers").innerText = merchandiseNumbers - number
+					}
+				} else {
+					//如果复选框被选中，则修改对于的商品数量
+					if (checkbox) {
+						document.querySelector("#merchandiseNumbers").innerHTML = parseInt(document
+							.querySelector("#merchandiseNumbers").innerText) + number
+					}
+					++number
+					button.parentNode.childNodes[3].innerText = number
+					let currentPrice = changePrice(price, number)
+					button.parentNode.nextElementSibling.nextElementSibling.innerText = currentPrice
+				}
+				calculateTotal()
+			})
+		})
+
+		// 计算总价格的函数
+		function calculateTotal() {
+			let total = 0; // 初始化总价格
+			// 遍历所有商品
+			let items = document.getElementsByClassName('item');
+			for (let i = 0; i < items.length; i++) {
+				if (items[i].getElementsByTagName('input')[0].checked) {
+					total += items[i].getElementsByTagName('td')[4].innerHTML
+				}
+			}
+			document.getElementById('merchandisePrices').innerHTML = parseInt(total)
+		}
+
+		//变动价格
+		function changePrice(price, number) {
+			return price *= number;
+		}
+
+
+		//监控所有复选框是否发生变化,若选中则算总价
+		let trs = document.querySelectorAll('tr')
+		//获取当前商品总价
+		let merchandisePrices = parseInt(document.querySelector('#merchandisePrices'))
+		let merchandiseNumbers = 0;
+
+		trs.forEach(function(tr) {
+			tr.addEventListener('change', function() {
+				calculateTotal()
+				if (tr.childNodes[1].childNodes[0].checked) {
+					merchandiseNumbers += parseInt(tr.childNodes[5].childNodes[3].innerText)
+					document.querySelector("#merchandiseNumbers").innerText = merchandiseNumbers
+				} else {
+					merchandiseNumbers -= parseInt(tr.childNodes[5].childNodes[3].innerText)
+					if (merchandiseNumbers >= 0) {
+						document.querySelector("#merchandiseNumbers").innerText = merchandiseNumbers
+					}
+				}
+			})
+		})
+	</script>
+</html>

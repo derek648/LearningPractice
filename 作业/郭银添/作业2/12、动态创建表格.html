@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+         table,table tr th, table tr td { border:1px solid #0094ff; }
+    </style>
+</head>
+<body>
+    <div>
+        <input type="text" id="username" />
+        <input type="radio" id="sexOne"  name="sex" value="男"/>男
+        <input type="radio" id="sexTwo" checked name="sex" value="女"/>女
+        <input type="text" id="age" />
+        <button id="add">添加</button>
+    </div>
+    <br/>
+    <table cellspacing="0" border="1" width="600px" >
+        <tr>
+            <td>姓名</td>
+            <td>性别</td>
+            <td>年龄</td>
+        </tr>
+    </table>
+    <script>
+        /**
+         * 给“添加”按钮添加一个点击事件监听器。
+         * 当用户点击按钮时，脚本会读取用户输入的姓名、性别和年龄，并执行以下操作：
+         * 验证用户是否填写了所有信息。
+         * 创建一个新的表格行和单元格。
+         * 将用户信息填充到新创建的单元格中。
+         * 清空输入框，以便用户可以输入新的信息。
+        * */
+        //页面上输入用户的姓名、性别、年龄 确认后 列表的方式显示添加的数据
+        document.getElementById('add').addEventListener('click', function() {
+            // 获取用户输入的数据
+            let username = document.getElementById('username').value;
+            let sex = document.querySelector('input[name="sex"]:checked').value;
+            let age = document.getElementById('age').value;
+
+            // 简单验证
+            if (!username || !sex || !age) {
+                alert('请填写完整的用户信息！');
+                return;
+            }
+
+            // 创建表格行和单元格
+            let table = document.getElementById('userTable');
+            let newRow = table.insertRow(-1); // 在表格末尾添加新行
+            let cell1 = newRow.insertCell(0);
+            let cell2 = newRow.insertCell(1);
+            let cell3 = newRow.insertCell(2);
+
+            // 将数据填充到单元格
+            cell1.textContent = username;
+            cell2.textContent = sex;
+            cell3.textContent = age;
+
+            // 清空输入框，准备下一次输入
+            document.getElementById('username').value = '';
+            document.getElementById('age').value = '';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <!-- 显示省 -->
+    <select id="province">
+        <option>选择省份</option>
+        
+    </select>
+    <!-- 显示市 -->
+    <select id="city">
+        <option>选择市区</option>
+    </select>
+    <!-- 显示市 -->
+    <select id="area">
+        <option>选择区</option>
+    </select>
+    
+    <script>
+        /**
+         * regions对象包含了省市区的关系数据,当用户选择一个省份时，市区下拉菜单会根据所选省份更新.
+         * 同样地，当用户选择一个市区时，区下拉菜单会更新以显示对应的区域选项。
+         * */
+        let regions = {
+            "北京市": {
+                "北京市": ["东城区", "西城区", "朝阳区", "丰台区"]
+            },
+            "上海市": {
+                "上海市": ["黄浦区", "徐汇区", "长宁区", "静安区"]
+            },
+            // 其他省市区数据...
+        };
+        // 初始化省份下拉菜单
+        function initProvince() {
+            let provinceSelect = document.getElementById('province');
+            for (let province in regions) {
+                let option = document.createElement('option');
+                option.value = province;
+                option.textContent = province;
+                provinceSelect.appendChild(option);
+            }
+        }
+
+        // 更新市区下拉菜单
+        function updateCity(province) {
+            let citySelect = document.getElementById('city');
+            citySelect.innerHTML = '<option value="">选择市区</option>';
+            if (province in regions) {
+                let cities = regions[province];
+                for (let city in cities) {
+                    let option = document.createElement('option');
+                    option.value = city;
+                    option.textContent = city;
+                    citySelect.appendChild(option);
+                }
+            }
+        }
+
+        // 更新区下拉菜单
+        function updateArea(city) {
+            let areaSelect = document.getElementById('area');
+            areaSelect.innerHTML = '<option value="">选择区</option>';
+            let province = document.getElementById('province').value;
+            if (province in regions) {
+                let cities = regions[province];
+                if (city in cities) {
+                    let areas = cities[city];
+                    areas.forEach(function(area) {
+                        let option = document.createElement('option');
+                        option.value = area;
+                        option.textContent = area;
+                        areaSelect.appendChild(option);
+                    });
+                }
+            }
+        }
+
+        // 监听省份变化
+        document.getElementById('province').addEventListener('change', function() {
+            let selectedProvince = this.value;
+            updateCity(selectedProvince);
+            updateArea(); // 清空区列表
+        });
+
+        // 监听市区变化
+        document.getElementById('city').addEventListener('change', function() {
+            let selectedCity = this.value;
+            updateArea(selectedCity);
+        });
+
+        // 初始化省份下拉菜单
+        initProvince();
+    </script>
+</body>
+</html>
