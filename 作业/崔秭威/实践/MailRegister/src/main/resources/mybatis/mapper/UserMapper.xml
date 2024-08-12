@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mailregister.dao.UserDao">
+
+    <resultMap id="userMap" type="com.example.mailregister.entity.User">
+        <result property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="email" column="email"/>
+        <result property="activeStatus" column="active_status"/>
+        <result property="activeCode" column="active_code"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.example.mailregister.entity.User">
+        insert into user ( username, password,email,active_status,active_code)
+        values (#{username}, #{password}, #{email},#{activeStatus},#{activeCode})
+      </insert>
+
+    <select id="selectUserByActiveCode" parameterType="String" resultType="com.example.mailregister.entity.User">
+        select * from user where active_code = #{activeCode}
+     </select>
+
+    <!--激活账户，修改用户状态-->
+    <update id="update" parameterType="com.example.mailregister.entity.User">
+      update user
+      set active_status=#{activeStatus},username=#{username},password=#{password},
+          email=#{email}, active_status=#{activeStatus},active_code=#{activeCode}
+      where id=#{id}
+    </update>
+
+    <!--登录,根据 activeStatus=1 进行查询-->
+    <select id="select" resultType="com.example.mailregister.entity.User">
+      select * from user where username=#{username} and password=#{password} and active_status=1
+    </select>
+</mapper>
