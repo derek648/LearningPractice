@@ -1,0 +1,3 @@
+<view class="container">
+  <button bindtap="info">授权登录</button>
+</view>
