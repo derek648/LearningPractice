@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+         * 首先检查goodsId是否已经存在于data数组中。如果存在，则使用splice方法将其移除。
+         * 如果data数组已经包含5个元素，使用shift方法移除第一个元素，为新元素腾出空间。
+         * 将新的goodsId添加到data数组的末尾。
+         * **/
+        //模拟最近浏览 实现的功能 实现一个函数 可以操作到data的变量最多5个元素 并且是按照加入顺序排队的
+        // 保存浏览商品的编号  最多5个 
+        let data = [];
+        // 浏览商品函数  参数自己设置  需要实现永远保证 data中最多5个值并且不能是重复的
+        function look(goodsId){
+            // 检查商品编号是否已存在于数组中
+            let index = data.indexOf(goodsId);
+            // 如果存在，将其移除
+            if (index !== -1) {
+                data.splice(index, 1);
+            } else if (data.length >= 5) {
+                // 如果数组已满，移除第一个元素
+                data.shift();
+            }
+            // 将商品编号添加到数组末尾
+            data.push(goodsId);
+        }
+
+        // 浏览第一个商品
+        look(101);//正常加入[101]
+        console.log(data);
+        look(102);//正常加入[101,102]
+        console.log(data);
+        look(103);//正常加入[101,102,103]
+        console.log(data);
+        look(101);//已经存在 需要修改位置 [102,103,101]
+        console.log(data);
+        look(104);//正常加入 [102,103,101,104]
+        console.log(data);
+        look(105);//正常加入 [102,103,101,104,105]
+        console.log(data);
+        look(106);//正常加入 [103,101,104,105,106]
+        console.log(data);
+
+    </script>
+</body>
+
+</html>

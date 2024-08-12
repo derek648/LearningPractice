@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>购物车2</title>
+        <style>
+            body {
+                font-family: 'Open Sans', sans-serif;
+                background-color: #f4f4f4;
+                margin: 0;
+                padding: 20px;
+            }
+            .shoppingBar {
+                background-color: #fff;
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                overflow: hidden;
+                width: 100%;
+                max-width: 900px;
+                margin: 20px auto;
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+            thead {
+                background-color: #333;
+                color: #fff;
+            }
+            th, td {
+                border: 1px solid #ddd;
+                padding: 15px;
+                text-align: left;
+            }
+            th {
+                background-color: #f5f5f5;
+            }
+            .selectAll {
+                width: 20px;
+                height: 20px;
+            }
+            .commodity img {
+                width: 100px;
+                height: 100px;
+                border-radius: 4px;
+                object-fit: cover;
+            }
+            .commodity .content {
+                display: flex;
+                align-items: center;
+            }
+            .commodity .content p {
+                margin: 0 0 0 10px;
+                color: #333;
+            }
+            .decr, .add {
+                cursor: pointer;
+                padding: 5px 10px;
+                border: 1px solid #ddd;
+                background-color: #fff;
+                transition: background-color 0.3s;
+            }
+            .decr:hover, .add:hover {
+                background-color: #f0f0f0;
+            }
+            .number {
+                margin: 0 10px;
+                min-width: 30px;
+                text-align: center;
+            }
+            .shoppingBar-footer {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 15px;
+                background-color: #f5f5f5;
+            }
+            .buy {
+                margin-left: auto;
+            }
+            .buy span {
+                font-weight: bold;
+                color: #d44;
+            }
+            #go {
+                padding: 10px 20px;
+                background-color: #ff4500;
+                color: #fff;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+            #go:hover {
+                background-color: #e84000;
+            }
+            .manage span {
+                margin-right: 10px;
+                cursor: pointer;
+                color: #007bff;
+                transition: color 0.3s;
+            }
+            .manage span:hover {
+                color: #0056b3;
+                text-decoration: underline;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <div class="shoppingBar">
+                <h2>购物清单</h2>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>
+                            <input type="checkbox" title="全选" class="selectAll">
+                        </th>
+                        <th>商品名称</th>
+                        <th>数量</th>
+                        <th>单价（元）</th>
+                        <th>金额（元）</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+                <div class="shoppingBar-footer">
+                    <div class="manage">
+                        <span class="delAll">
+                            删除所选商品
+                        </span>
+                        <span class="return">
+                            继续购物
+                        </span>
+                    </div>
+                    <button id="go" type="button">
+                        去结算
+                    </button>
+                    <div class="buy">
+                        <span>
+                            0
+                        </span>
+                        件商品总计：
+                        <span>
+                            ￥{{total}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+    <script>
+        //获取页面上的DOM对象
+        function $$(selector, isMore = false) {
+            let methods = isMore ? 'querySelectorAll' : 'querySelector';
+            return document[methods](selector);
+        }
+        //渲染购物车数据
+        let data = [
+            {
+                id:1,
+                goodsName:'鼠标',
+                price:30,
+                goodsThumb:'https://cbu01.alicdn.com/img/ibank/2017/751/451/4500154157_1712425859.jpg',
+                goodsNumber:1,
+            },
+            {
+                id:2,
+                goodsName: '键盘',
+                price:100,
+                goodsThumb: 'https://img.zcool.cn/community/0119315cc04908a80121416864c968.jpg@1280w_1l_2o_100sh.jpg',
+                goodsNumber: 1,
+            },
+            {
+                id:3,
+                goodsName: '显卡',
+                price: 2000,
+                goodsThumb: 'https://tse4-mm.cn.bing.net/th/id/OIP-C.XafedcovLmEwipq5bdbw0gHaFi?rs=1&pid=ImgDetMain',
+                goodsNumber:1,
+            },
+            {
+                id:4,
+                goodsName: 'CPU',
+                price: 1000,
+                goodsThumb: 'https://tse3-mm.cn.bing.net/th/id/OIP-C.hcOnOldxnmOrrEt8EbaP8wHaFz?rs=1&pid=ImgDetMain',
+                goodsNumber: 1,
+            },
+            {
+                id: 5,
+                goodsName: '硬盘',
+                price: 500,
+                goodsThumb:'https://tse4-mm.cn.bing.net/th/id/OIP-C.-9jE_ZCZ-2zCEMGu5sgULQHaG9?rs=1&pid=ImgDetMain',
+                goodsNumber: 1,
+            },
+        ]
+        let html='';
+        data.forEach(function(goods) {
+            html += `<tr class="commodity">
+                    <th>
+                        <input type="checkbox" class="input">
+                    </th>
+                    <th class="content">
+                        <img src="${goods.goodsThumb}" width="100px" height="100px">
+                        <p>${goods.goodsName} </p>
+                    </th>
+                    <th>
+                        <button type="button" class="decr">-</button>
+                        <span class="number"> ${goods.goodsNumber}</span>
+                        <button type="button" class="add">+</button>
+                    </th>
+                    <th class="price">${goods.price}</th>
+                    <th class="money">${goods.goodsNumber * goods.price}</th>
+                    <th>
+                        <span class="glyphicon glyphicon-remove">删除</span>
+                    </th>
+                </tr>`;
+        })
+        $$('tbody').innerHTML = html;
+        //实现全选与取消
+        $$('.selectAll').addEventListener('click', function () {
+            let inputs = $$('.input', true);
+            // forEach第三个参数用于指定匿名函数中this表示的对象 此时传递的this 表示的是全选的dom对象
+            inputs.length > 0 && inputs.forEach(function (dom) {
+                dom.checked = this.checked;
+            }, this)
+            sum();
+        })
+        //商品勾选全选与取消
+        $$('tbody').addEventListener('click', function (event) {
+            switch (event.target.className) {
+                case 'input':
+                    // 点击的CheckBox
+                    // $$('.input',true).length 取出所有的商品数量
+                    // $$('.input:checked',true).length 取出所有被勾选的数量
+                    $$('.selectAll').checked = $$('.input', true).length == $$('.input:checked', true).length;
+                    sum();
+                    break;
+                case 'glyphicon glyphicon-remove':
+                    // 删除逻辑
+                    this.removeChild(event.target.parentElement.parentElement)
+                    sum();
+                    // 处理全选情况
+                    $$('.selectAll').checked = $$('.input', true).length == $$('.input:checked', true).length;
+                    break;
+                case 'add':
+                    // 数量增加
+                    let goodsNumber = event.target.previousElementSibling.innerHTML - 0 + 1;
+                    changeGoodsNumber(goodsNumber, event.target.parentElement.parentElement);
+                    break;
+                case 'decr':
+                    // 数量减少
+                    let number = event.target.nextElementSibling.innerHTML - 0;
+                    if (number <= 0) {
+                        alert('只有一件了不能再减了');
+                        return;
+                    }
+                    changeGoodsNumber(number-1, event.target.parentElement.parentElement);
+                    break;
+                default:
+                    break;
+            }
+        })
+        sum();
+        //封装计算总计的函数
+        function sum() {
+            let count = 0;
+            let price = 0;
+            // 找到被勾选的商品 然后在计算总数量
+            $$('.input:checked', true).forEach(function (dom) {
+                // dom是属于input标签的dom对象
+                // parentElement 表示获取上一级的标签
+                let trDom = dom.parentElement.parentElement;
+                // 计算总数量
+                count += trDom.querySelector('.number').innerHTML.trim()-0;
+                // 计算总金额
+                price += trDom.querySelector('.money').innerHTML.trim()-0;
+            })
+            let totalDom = $$('.buy>span',true);
+            totalDom[0].innerHTML = count;
+            totalDom[1].innerHTML = price;
+        }
+        //封装函数实现数量的修改
+        function changeGoodsNumber(goodsNumber,trDom) {
+            trDom.querySelector('.number').innerHTML = goodsNumber;
+            trDom.querySelector('.money').innerHTML = goodsNumber * (trDom.querySelector('.price').innerHTML.trim()-0);
+            sum();
+        }
+        //实现批量删除
+        $$('.delAll').addEventListener('click',function(){
+            console.log($$('.input:checked'))
+            $$('.input:checked',true).forEach(function(dom){
+                $$('tbody').removeChild(dom.parentElement.parentElement);
+                sum();
+                // 处理全选情况
+                $$('.selectAll').checked = $$('.input', true).length == $$('.input:checked', true).length;
+            })
+        })
+    </script>
+</html>

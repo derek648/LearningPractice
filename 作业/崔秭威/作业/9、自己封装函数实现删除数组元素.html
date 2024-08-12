@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 实现将数组中元素删除掉
+        function deleteArr(arr,start,end){}
+    </script>
+    <script>
+        function deleteArr(arr, start, end) {
+            // 如果start或end不在数组索引范围内，则不做任何操作
+            if (start < 0 || end >= arr.length || start > end) {
+                return arr;
+            }
+
+            // 删除指定范围的元素
+            return arr.slice(0, start).concat(arr.slice(end + 1));
+        }
+
+        // 示例
+        var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+        var result = deleteArr(arr, 2, 5); // 删除索引2到5的元素（包括2和5）
+        console.log(result); // 输出结果应该是 [1, 2, 8, 9]
+    </script>
+
+</body>
+</html>

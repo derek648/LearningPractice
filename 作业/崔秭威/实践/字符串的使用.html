@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>String</title>
+</head>
+<body>
+    <script>
+        //字符串比较
+        let str1="hello";
+        let str2="good";
+        console.log(str1>str2);
+        //字符串长度
+        let str3="君不见黄河之水天上来，奔流到海不复回。君不见高堂明镜悲白发，朝如青丝暮成雪。";
+        console.log(str3.length);
+        for(let i=0;i<str3.length;i++){
+            console.log(str3[i]);
+        }
+        //fromCharCode将某个数字转换为对应的字符
+        console.log(String.fromCharCode(100));
+        //indexOf查找字符串出现的首次位置
+        let str4="read old books";
+        console.log(str4.indexOf('o'));
+        //统计字符出现的次数,第一个参数是是需要查找的字符，第二个参数是需要偏移的下标位置
+        let str5="hello world!";
+        let count=0;
+        let start=0;
+        while(true){
+            let index=str5.indexOf('l',start);
+            if(index == -1) break;
+            count++;
+            start=index+1;
+        }
+        console.log(count);
+        //split实现字符串分割，将其变为数组
+        let str6="h,e,l,l,o";
+        console.log(str6.split(','));
+        //substring(start,end),从start开始，到end处结束，包括开始不包括结束
+        console.log(str5.substring(0,3));
+        //trim用于删除左右空白
+        let str7=" hello world ";
+        console.log(str7.trim());
+    </script>
+</body>
+</html>

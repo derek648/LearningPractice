@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 定义一个含有30个整型元素的数组，按顺序分别赋予从2开始的偶数；然后按顺序每五个数求出一个平均值，放在另一个数组中并输出
+        
+    </script>
+    <script>
+        // 定义一个含有30个整型元素的数组，按顺序分别赋予从2开始的偶数
+        var numbers = [];
+        for (var i = 0; i < 30; i++) {
+            numbers[i] = 2 + i * 2;
+        }
+
+        // 按顺序每五个数求出一个平均值，放在另一个数组中
+        var averages = [];
+        for (var i = 0; i < numbers.length; i += 5) {
+            var sum = 0;
+            for (var j = 0; j < 5; j++) {
+                sum += numbers[i + j];
+            }
+            averages.push(sum / 5);
+        }
+
+        // 输出平均值数组
+        console.log(averages);
+    </script>
+</body>
+</html>

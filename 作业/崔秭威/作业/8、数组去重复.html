@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+        //  编写函数norepeat(arr) 将数组的重复元素去掉，并返回新的数组
+        var arr = [1, 2, 3, 4, 5, 3, 6, 7, 3, 2];
+        var result = [];
+    </script>
+    <script type="text/javascript">
+        function norepeat(arr) {
+            var result = [];
+            var found = {};
+
+            for (var i = 0; i < arr.length; i++) {
+                if (!found[arr[i]]) {
+                    result.push(arr[i]);
+                    found[arr[i]] = true;
+                }
+            }
+
+            return result;
+        }
+
+        var arr = [1, 2, 3, 4, 5, 3, 6, 7, 3, 2];
+        var result = norepeat(arr);
+        console.log(result); // 输出结果应该是 [1, 2, 3, 4, 5, 6, 7]
+    </script>
+
+</body>
+
+</html>
