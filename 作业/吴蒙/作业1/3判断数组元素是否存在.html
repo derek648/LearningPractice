@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>检查数组元素是否存在</title>
+</head>
+<body>
+    <div id="output"></div> <!-- 用于显示结果的div -->
+
+    <script>
+        /**
+         * 判断数组中是否存在特定元素
+         * @param {Array} arr - 要搜索的数组
+         * @param {number} target - 要查找的目标元素
+         * @returns {number|null} - 返回找到的下标或返回null表示不存在
+         */
+        function findElementIndex(arr, target) {
+            for (let i = 0; i < arr.length; i++) {
+                if (arr[i] === target) {
+                    return i; // 找到目标元素，返回其索引
+                }
+            }
+            return null; // 目标元素不存在，返回null
+        }
+
+        // 测试数组和目标元素
+        const array = [10, 20, 30, 40, 50, 60, 70, 80, 90];
+        const target = 60;
+
+        // 调用函数并输出结果
+        const resultIndex = findElementIndex(array, target);
+        const outputDiv = document.getElementById('output');
+
+        if (resultIndex !== null) {
+            outputDiv.innerHTML += `<p>元素 ${target} 存在于数组中，索引为: ${resultIndex}</p>`;
+        } else {
+            outputDiv.innerHTML += `<p>元素 ${target} 不存在于数组中。</p>`;
+        }
+
+        // 测试不存在的元素
+        const targetNotExist = 100;
+        const resultIndexNotExist = findElementIndex(array, targetNotExist);
+
+        if (resultIndexNotExist !== null) {
+            outputDiv.innerHTML += `<p>元素 ${targetNotExist} 存在于数组中，索引为: ${resultIndexNotExist}</p>`;
+        } else {
+            outputDiv.innerHTML += `<p>元素 ${targetNotExist} 不存在于数组中。</p>`;
+        }
+    </script>
+</body>
+</html>
