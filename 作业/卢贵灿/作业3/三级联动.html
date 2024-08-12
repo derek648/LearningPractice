@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+<!-- 显示省 -->
+<select id="province" onchange="loadCities()">
+    <option>选择省份</option>
+</select>
+<!-- 显示市 -->
+<select id="city" onchange="loadAreas()">
+    <option>选择市区</option>
+</select>
+<!-- 显示区 -->
+<select id="area">
+    <option>选择区</option>
+</select>
+
+<script>
+    // 示例数据
+    let data = {
+        "荆州市": {
+            "荆州区": ["城区1", "城区2", "城区3"],
+            "沙市区": ["东城区", "西城区", "南城区"]
+        },
+        "武汉市": {
+            "汉口区": ["城区A", "城区B", "城区C"],
+            "武昌区": ["111", "222", "333"]
+        }
+    };
+
+    // 加载省份
+    function loadProvinces() {
+        let select = document.getElementById('province');
+        Object.keys(data).forEach(province => {
+            let option = document.createElement('option');
+            option.value = province;
+            option.text = province;
+            select.add(option);
+        });
+    }
+
+    // 加载市
+    function loadCities() {
+        let province = document.getElementById('province').value;
+        let select = document.getElementById('city');
+        select.innerHTML = '<option>选择市区</option>';
+        if (province in data) {
+            Object.keys(data[province]).forEach(city => {
+                let option = document.createElement('option');
+                option.value = city;
+                option.text = city;
+                select.add(option);
+            });
+        }
+    }
+
+    // 加载区
+    function loadAreas() {
+        let province = document.getElementById('province').value;
+        let city = document.getElementById('city').value;
+        let select = document.getElementById('area');
+        select.innerHTML = '<option>选择区</option>';
+        if (province in data && city in data[province]) {
+            data[province][city].forEach(area => {
+                let option = document.createElement('option');
+                option.value = area;
+                option.text = area;
+                select.add(option);
+            });
+        }
+    }
+    document.onload = loadProvinces;
+</script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+body{
+    background-color: #204e66;
+
+}
+.shopbackground{
+    background: #d5d1d1;
+    width: 1500px;
+    height: 1000px;
+    position: relative;
+    left: 350px;
+
+}
+.title{
+    font-size: 30px;
+}
+
+.topname span{
+
+    margin-right: 100px;
+    font-size: 25px;
+    position: relative;
+    left: 500px;
+}
+
+.goods-container {
+    height: 140px;
+    margin-top: 50px;
+    /*background-color: #ffffff; !* 白色背景 *!*/
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+.item-detail span {
+
+    margin-right: 155px;
+    font-size: 30px;
+    position: relative;
+    left: 450px;
+}
+.settlementButton{
+    background-color: darkgray;
+    font-size: 30px;
+    position: relative;
+    left: 1200px;
+}
+.total{
+    font-size: 30px;
+    position: relative;
+    left: 1000px;
+
+}
+.allButton{
+
+    position: relative;
+    left: 13px;
+}
+.divid{
+    background-color: #c0bfbf;
+    position: relative;
+    height: 5px;
+    bottom: 25px;
+
+}
+

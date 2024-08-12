@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 将多维数组
+        var arr = [
+            [1, 2, 2],
+            [3, 4, 5, 5],
+            [6, 7, 8, 9, [11, 12, [12, 13, [14]]]], 10
+        ];
+        // 转为一维数组 [1, 2, 2, 3, 4, 5, 5, 6, 7, 8, 9, 11, 12, 12, 13, 14, 10]
+        // 提示：需要使用 instanceof判断是否为数组 并且使用递归
+        // console.log(arr instanceof Array);
+        // console.log(typeof arr)
+       
+        function flattenArray(array) {  
+            let result = [];  
+            function flatten(arr) {  
+                arr.forEach(item => {  
+                    if (Array.isArray(item)) {  
+                        flatten(item); // 递归调用处理子数组  
+                    } else {  
+                        result.push(item); // 将非数组元素添加到结果数组中  
+                    }  
+                });  
+            }  
+            flatten(array); // 初始调用  
+            return result;  
+        }  
+        
+        console.log(flattenArray(arr));
+
+
+    </script>
+</body>
+</html>

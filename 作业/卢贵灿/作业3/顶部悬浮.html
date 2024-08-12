@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    #backTop{
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        display: none;
+        /*cursor: pointer;*/
+    }
+</style>
+<body>
+<button id="backTop">回到顶部</button>
+
+<div>
+    <p style="width:20px;">
+        锄禾日当午，汗滴禾下土。谁知盘中餐，粒粒皆辛苦。
+        床前明月光，疑是地上霜。举头望明月，低头思故乡。
+
+        离离原上草，一岁一枯荣。野火烧不尽，春风吹又生。
+        锄禾日当午，汗滴禾下土。谁知盘中餐，粒粒皆辛苦。
+        床前明月光，疑是地上霜。举头望明月，低头思故乡。
+
+        离离原上草，一岁一枯荣。野火烧不尽，春风吹又生。
+    </p>
+
+</div>
+<script>
+    // 1、当滚动距离达到300px时显示出顶部公共
+    // 2、当滚动距离达到350px是显示回到顶部
+    // 3、当点击回到顶部 慢慢的滑动上去
+    // 提示：修改样式使用 dom对象.style.样式名称 = 样式值
+    // dom.style.display='block'
+
+
+    //获取button按钮
+    document.addEventListener('DOMContentLoaded', function() {
+        //获取按钮
+        let backTopButton = document.getElementById('backTop');
+
+        // 设置鼠标滚动事件
+        function handleScroll() {
+            if (document.body.scrollTop > 350 || document.documentElement.scrollTop > 350) {
+                backTopButton.style.display = "block";
+            } else {
+                backTopButton.style.display = "none";
+            }
+        }
+        // 监听滚动事件，并绑定上面定义的函数
+        document.addEventListener('scroll', handleScroll);
+    });
+
+    let timer;
+    backTop.onclick = function() {
+        // 实时获取当前滚动的位置
+        let currentScroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+        // 定义一个函数来逐步减少滚动位置
+        const scrollStep = () => {
+            const scrollDistance = 20;
+            if (currentScroll > 0) {
+                // 滚动到新的位置
+                window.scrollTo(0, currentScroll - scrollDistance);
+                // 更新当前滚动位置
+                currentScroll -= scrollDistance;
+                if (currentScroll > 0) {
+                    timer = setInterval(scrollStep, 100);
+                } else {
+                    clearInterval(timer);
+                }
+            } else {
+                clearInterval(timer);
+            }
+        };
+        scrollStep();
+    };
+
+
+
+</script>
+</body>
+</html>

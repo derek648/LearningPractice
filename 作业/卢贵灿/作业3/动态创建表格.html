@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table,table tr th, table tr td { border:1px solid #0094ff; }
+    </style>
+</head>
+<body>
+<div>
+    <input type="text" id="username" />
+    <input type="radio" id="sexOne"  name="sex" value="男"/>男
+    <input type="radio" id="sexTwo" checked name="sex" value="女"/>女
+    <input type="text" id="age" />
+    <button id="add">添加</button
+</div>
+<br />
+<table id="userInfoTable" cellspacing="0" width="600px">
+    <tr>
+        <th>姓名</th>
+        <th>性别</th>
+        <th>年龄</th>
+    </tr>
+</table>
+
+<script>
+    document.getElementById('add').addEventListener('click', function() {
+        let username = document.getElementById('username').value;
+        var sex = document.querySelector('input[name="sex"]:checked').value;
+        var age = document.getElementById('age').value;
+
+        // 验证输入
+        if (!username || !age || !sex) {
+            alert('请填写所有信息！');
+            return;
+        }
+
+        // 创建新的行和单元格
+        let table = document.getElementById('userInfoTable');
+        let row = table.insertRow(-1); // 在表格末尾插入新行
+
+        let cell1 = row.insertCell(0);
+        let cell2 = row.insertCell(1);
+        let cell3 = row.insertCell(2);
+
+        // 填充数据
+        cell1.innerHTML = username;
+        cell2.innerHTML = sex;
+        cell3.innerHTML = age;
+
+        // 清空输入框
+        document.getElementById('username').value = '';
+        document.getElementById('age').value = '';
+    });
+</script>
+</body>
+</html>

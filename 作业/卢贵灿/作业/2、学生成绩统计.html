@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            以下是某班级一次考试的成绩表。请计算每个学生总成绩，并按总成绩排名。统计各单科成绩第一名，输出其成绩与学号
+            学号    语文    数学    英语	总成绩	备注
+            1       105     62      118		
+            2       89      78	    120		
+            3       86      64	    80		
+            4       78      99	    91		
+            5       107.5   97	    70		
+            6       112     61	    92		
+            7       101     79	    104		
+            8       71      72	    105		
+            9       56      68	    61		
+            10      98      83	    77	
+        */
+        let scores = [  
+            { id: 1, chinese: 105, math: 62, english: 118 },  
+            { id: 2, chinese: 89, math: 78, english: 120 },  
+            { id: 3, chinese: 86, math: 64, english: 80 },  
+            { id: 4, chinese: 78, math: 99, english: 91 },  
+            { id: 5, chinese: 107.5, math: 97, english: 70 },  
+            { id: 6, chinese: 112, math: 61, english: 92 },  
+            { id: 7, chinese: 101, math: 79, english: 104 },  
+            { id: 8, chinese: 71, math: 72, english: 105 },  
+            { id: 9, chinese: 56, math: 68, english: 61 },  
+            { id: 10, chinese: 98, math: 83, english: 77 }  
+        ];  
+    
+        // 计算每个学生的总成绩  
+        scores.forEach(student => {  
+            student.total = student.chinese + student.math + student.english;  
+        });  
+    
+        // 按总成绩排序  
+        scores.sort((a, b) => b.total - a.total);  
+    
+        // 找出各单科的第一名  
+        let topChinese = scores.reduce((acc, curr) => curr.chinese > acc.chinese ? curr : acc, scores[0]);  
+        let topMath = scores.reduce((acc, curr) => curr.math > acc.math ? curr : acc, scores[0]);  
+        let topEnglish = scores.reduce((acc, curr) => curr.english > acc.english ? curr : acc, scores[0]);  
+    
+        // 输出结果  
+        console.log("总成绩排名:");  
+        scores.forEach((student, index) => {  
+            console.log(`学号: ${student.id}, 总成绩: ${student.total} (排名: ${index + 1})`);  
+        });  
+    
+        console.log("单科第一名:");  
+        console.log(`语文: 学号${topChinese.id}, 成绩${topChinese.chinese}`);  
+        console.log(`数学: 学号${topMath.id}, 成绩${topMath.math}`);  
+        console.log(`英语: 学号${topEnglish.id}, 成绩${topEnglish.english}`);  
+
+        
+    </script>
+</body>
+</html>

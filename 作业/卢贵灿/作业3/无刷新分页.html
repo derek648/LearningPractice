@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #pagination {
+            margin-top: 20px;
+        }
+        #pagination a {
+            margin: 0 5px;
+            text-decoration: none;
+            color: blue;
+        }
+        #page {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+<div id="page">
+    <!-- 页面内容将在这里动态更新 -->
+</div>
+<div id="pagination">
+    <!-- 分页导航 -->
+</div>
+
+<script>
+    let data = [];
+    let total = 101;
+    let perPage = 10;
+    let currentPage = 1;
+
+    // 填充数据
+    for (var i = 1; i <= total; i++) {
+        data.push('我是第' + i + '条数据');
+    }
+
+    // 显示数据函数
+    function showData(page) {
+        let start = (page - 1) * perPage;
+        let end = start + perPage;
+        let pageContent = '';
+        for (var i = start; i < end && i < data.length; i++) {
+            pageContent += data[i] + '<br>';
+        }
+        document.getElementById('page').innerHTML = pageContent;
+    }
+
+    // 生成分页导航
+    function generatePagination() {
+        let paginationHTML = '<a href="javascript:void(0);" onclick="changePage(1)">1</a>';
+        for (let i = 2; i <= Math.ceil(total / perPage); i++) {
+            paginationHTML += ' <a href="javascript:void(0);" onclick="changePage(' + i + ')">' + i + '</a>';
+        }
+        document.getElementById('pagination').innerHTML = paginationHTML;
+    }
+
+    // 更改页码并显示对应数据
+    function changePage(page) {
+        if (page < 1 || page > Math.ceil(total / perPage)) return;
+        currentPage = page;
+        showData(currentPage);
+    }
+    showData(currentPage);
+    generatePagination();
+</script>
+</body>
+
+</html>

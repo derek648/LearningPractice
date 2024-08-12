@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var data = [];
+
+    function look(goodsId) {
+        let index = data.indexOf(goodsId);
+        if (index !== -1) {
+            data.splice(index, 1);
+        }
+        data.unshift(goodsId);
+        if (data.length > 5) {
+            data.pop();
+        }
+        console.log(data);
+    }
+
+    // 测试函数
+    look(101);
+    look(102);
+    look(103);
+    look(101);
+    look(104);
+    look(105);
+    look(106);
+    look(107);
+</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>  
+        // 实现将数组中指定起始索引到结束索引（不包含end）之间的元素删除掉  
+        function deleteArr(arr, start, end) {  
+            // 确保start和end索引是有效的  
+            if (start < 0 || end > arr.length || start >= end) {  
+                return; // 或者可以抛出一个错误，具体取决于你的需求  
+            }  
+      
+            // 使用splice()方法删除指定范围内的元素  
+            // 注意：splice会修改原数组，并返回被删除的元素组成的数组  
+            arr.splice(start, end - start);  
+      
+            // 注意：此函数修改了原数组arr，如果你不想修改原数组，需要先复制一份数组  
+            // 例如：let newArr = [...arr]; 然后在newArr上调用deleteArr  
+        }  
+      
+        // 示例  
+        let myArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];  
+        deleteArr(myArray, 2, 6); // 删除索引2到5的元素（即3, 4, 5, 6）  
+        console.log(myArray); // 输出: [1, 2, 7, 8, 9]  
+    </script>
+</body>
+</html>

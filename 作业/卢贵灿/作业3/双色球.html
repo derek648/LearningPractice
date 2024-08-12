@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>title</title>
+</head>
+<body>
+<p id="result"></p>
+
+<script>
+  function ball() {
+    let redBall = [];
+    let blueBall;
+
+
+    //生成红球
+    while (redBall.length<6){
+      let randomnumber = Math.floor(Math.random()*33+1);
+      if (!redBall.includes(randomnumber)){
+        redBall.push(randomnumber);
+      }
+    }
+    blueBall = Math.floor(Math.random()*16+1);
+    let resultText = `红球：${redBall.join(', ')}蓝球：${blueBall}`;
+    document.getElementById('result').textContent = resultText;
+
+  }
+  ball();
+
+</script>
+</body>
+</html>
