@@ -1,0 +1,136 @@
+body{
+	margin: 0;
+	padding: 0;
+	height: auto;
+	text-decoration: none;
+	list-style: none;
+	font-size: 12px;
+	background-color: #F5F5F5;
+}
+
+ .shoppingBar {
+      width: 1130px;
+      border: 2px solid #F5F5F5;
+      margin: 40px auto;
+      position: relative;
+      background-color: white;
+      font-size: 16px;
+    }
+
+    .shoppingBar h2 {
+      height: 60px;
+      line-height: 60px;
+      color: black;
+      text-indent: 40px;
+    }
+    .shoppingBar table {
+      width: 100%;
+      margin-bottom: 60px;
+    }
+    .shoppingBar table .money{
+    	color: red;
+    }
+    .shoppingBar table .commodity{
+    	border: 3px solid #F5F5F5;
+    	height: 150px;
+    }
+    .shoppingBar>table tr th input{
+    	width: 25px;
+    	height: 25px;
+    	margin-left: 30px;
+    }
+    .shoppingBar table tr:first-of-type {
+      height: 80px;
+      color: #424242;
+      font-size: 14px;
+      border-top: 1px solid #F5F5F5;
+      border-bottom: 1px solid #F5F5F5;
+    }
+    .shoppingBar table tr th img {
+      width: 120px;
+      height: 100px;
+      float: left;
+    }
+
+    .shoppingBar table tr th p {
+      float: right;
+      width: 100px;
+      font-size: 18px;
+      color: #424242;
+    }
+
+    .shoppingBar table tr .content {
+      width: 220px;
+      padding: 0 100px;
+    }
+
+    .shoppingBar table tr #delete {
+      cursor: pointer;
+      font-size: 20px;
+    }
+    
+    .shoppingBar table tr #delete:hover{
+    	color: red;
+    }
+    
+    .shoppingBar .shoppingBar-footer {
+      border: 1px solid #F5F5F5;
+      width: 1130px;
+      height: 60px;
+      position: absolute;
+      margin-top: 10px;
+      color: #757575;
+      font-size: 14px;
+      background-color: white;
+    }
+
+    .shoppingBar .shoppingBar-footer .manage {
+      float: left;
+      height: 40px;
+    }
+
+    .shoppingBar .shoppingBar-footer .manage .delAll,
+    .return { 
+      cursor: pointer;
+      background: #F5F5F5;
+      color: #757575;
+      line-height: 60px;
+      margin: 0px 30px;
+    }
+    .shoppingBar .shoppingBar-footer .manage .delAll,
+    .return:hover{
+    	color: #FF6700;
+    	transition: all 0.5s ease-in-out; 
+    }
+    .shoppingBar .shoppingBar-footer .buy {
+      float: right;
+      height: 40px;
+      line-height: 60px;
+    }
+
+    .shoppingBar .shoppingBar-footer #go {
+      float: right;
+      height: 60px;
+      width: 110px;
+      font-weight: 400;
+      font-size: 18px;
+      outline: none;
+      background-color: #E0E0E0;
+      border: none;
+      border-radius: 2px;
+      margin-left: 10px;
+      cursor: pointer;
+      color: white;
+    }
+    .shoppingBar .shoppingBar-footer .active{
+    	background-color: #FF6700;
+    }
+    .shoppingBar .shoppingBar-footer .buy span {
+      font-weight: bold;
+      font-size: 30px;
+      color: red;
+    }
+    .shoppingBar .shoppingBar-footer #go:hover{
+    	background-color: red;
+    	transition: all 0.5s ease 0s;
+    }

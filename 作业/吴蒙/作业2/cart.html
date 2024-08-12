@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>购物车</title>
+    <link rel="stylesheet" type="text/css" href="cart.css">
+    <script src="vue-2.5.17.js"></script>
+</head>
+<body>
+    <!-- Shopping Cart Items Table -->
+    <div id="vueApp">
+        <div class="cartHeader">
+            <h2>购物清单</h2>
+            <table>
+                <tbody>
+                    <tr>
+                        <th>
+                            <input type="checkbox" title="全选" v-model="isChecked" @change="toggleSelection">
+                        </th>
+                        <th>商品名称</th>
+                        <th>数量</th>
+                        <th>单价（元）</th>
+                        <th>金额（元）</th>
+                        <th>操作</th>
+                    </tr>
+                    <tr class="item" v-for="(product, idx) in productList" :key="product.id">
+                        <td>
+                            <input type="checkbox" class="itemCheckbox" :value="product.id" v-model="selectedItems">
+                        </td>
+                        <td class="itemDetails">
+                            <img :src="product.image" width="100px" height="100px">
+                            <p>{{ product.name }}</p>
+                        </td>
+                        <td>
+                            <button type="button" @click="decreaseQuantity(idx)">-</button>
+                            <span>{{ product.quantity }}</span>
+                            <button type="button" @click="increaseQuantity(idx)">+</button>
+                        </td>
+                        <td>{{ product.unitPrice }}</td>
+                        <td class="totalAmount">{{ product.quantity * product.unitPrice }}</td>
+                        <td>
+                            <span class="removeItem">删除</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="cartFooter">
+                <div class="actions">
+                    <span class="removeSelected">删除所选商品</span>
+                    <span class="continueShopping">继续购物</span>
+                </div>
+                <button id="checkout" type="button">去结算</button>
+                <div class="summary">
+                    <span>{{ selectedItems.length }}</span> 件商品总计: <span>￥{{ totalAmount }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    new Vue({
+        el: '#vueApp',
+        data: {
+            productList: [
+                { id: 1, name: '电视机', image: 'img/1.png', quantity: 1, unitPrice: 200 },
+                { id: 2, name: '洗衣机', image: 'img/2.png', quantity: 1, unitPrice: 150 },
+                { id: 3, name: '冰箱', image: 'img/3.png', quantity: 1, unitPrice: 100 }
+            ],
+            isChecked: false,
+            selectedItems: []
+        },
+        computed: {
+            totalAmount() {
+                return this.productList.reduce((total, product) => {
+                    if (this.selectedItems.includes(product.id)) {
+                        return total + product.unitPrice * product.quantity;
+                    }
+                    return total;
+                }, 0);
+            }
+        },
+        methods: {
+            increaseQuantity(index) {
+                this.productList[index].quantity++;
+            },
+            decreaseQuantity(index) {
+                if (this.productList[index].quantity <= 1) {
+                    alert('数量最少一件');
+                    return;
+                }
+                this.productList[index].quantity--;
+            },
+            toggleSelection() {
+                if (this.isChecked) {
+                    this.selectedItems = this.productList.map(product => product.id);
+                } else {
+                    this.selectedItems = [];
+                }
+            }
+        }
+    });
+</script>
+</html>
