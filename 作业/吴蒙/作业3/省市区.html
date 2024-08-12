@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>省市区选择联动</title>
+</head>
+<body>
+<!-- 显示省 -->
+<select id="province">
+  <option>选择省份</option>
+</select>
+<!-- 显示市 -->
+<select id="city">
+  <option>选择市区</option>
+</select>
+<!-- 显示区 -->
+<select id="area">
+  <option>选择区</option>
+</select>
+
+<script>
+  // 假设的数据结构
+  var provinces = [
+    {name: "北京", cities: [{name: "北京市", areas: ["东城区", "西城区", "朝阳区"]}]},
+    {name: "上海", cities: [{name: "上海市", areas: ["浦东新区", "徐汇区", "长宁区"]}]}
+  ];
+
+  // 初始化省份下拉列表
+  function initProvinces() {
+    var provinceSelect = document.getElementById('province');
+    provinces.forEach(function(province) {
+      var option = document.createElement('option');
+      option.value = province.name;
+      option.text = province.name;
+      provinceSelect.appendChild(option);
+    });
+  }
+
+  // 更新城市下拉列表
+  function updateCities() {
+    var provinceSelect = document.getElementById('province');
+    var citySelect = document.getElementById('city');
+    var areaSelect = document.getElementById('area');
+
+    var selectedProvince = provinceSelect.options[provinceSelect.selectedIndex].value;
+    var selectedProvinceData = provinces.find(function(p) { return p.name === selectedProvince; });
+
+    // 清空城市和区的选择
+    citySelect.innerHTML = '<option>选择市区</option>';
+    areaSelect.innerHTML = '<option>选择区</option>';
+
+    if (selectedProvinceData) {
+      selectedProvinceData.cities.forEach(function(city) {
+        var option = document.createElement('option');
+        option.value = city.name;
+        option.text = city.name;
+        citySelect.appendChild(option);
+      });
+    }
+  }
+
+  // 更新区下拉列表
+  function updateAreas() {
+    var provinceSelect = document.getElementById('province');
+    var citySelect = document.getElementById('city');
+    var areaSelect = document.getElementById('area');
+
+    var selectedProvince = provinceSelect.options[provinceSelect.selectedIndex].value;
+    var selectedCity = citySelect.options[citySelect.selectedIndex].value;
+    var selectedProvinceData = provinces.find(function(p) { return p.name === selectedProvince; });
+
+    // 清空区的选择
+    areaSelect.innerHTML = '<option>选择区</option>';
+
+    if (selectedProvinceData && selectedProvinceData.cities.find(function(c) { return c.name === selectedCity; })) {
+      var selectedCityData = selectedProvinceData.cities.find(function(c) { return c.name === selectedCity; });
+      selectedCityData.areas.forEach(function(area) {
+        var option = document.createElement('option');
+        option.value = area;
+        option.text = area;
+        areaSelect.appendChild(option);
+      });
+    }
+  }
+
+  // 初始化省份选择
+  initProvinces();
+
+  // 添加事件监听器
+  document.getElementById('province').addEventListener('change', updateCities);
+  document.getElementById('city').addEventListener('change', updateAreas);
+</script>
+</body>
+</html>

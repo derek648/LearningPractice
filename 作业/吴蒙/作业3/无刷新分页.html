@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+</head>
+<body>
+<div id="content"></div>
+<div id="page" class="pagination"></div>
+<script>
+  var data = []; // 已有的数据
+  var total = 101; // 数据总条数
+  var perPage = 10; // 每页显示的条数
+  var currentPage = 1; // 当前页
+
+  // 初始化数据
+  for (var i = 1; i <= total; i++) {
+    data.push('我是第' + i + '条数据');
+  }
+
+  // 计算总的页数
+  var totalPages = Math.ceil(total / perPage);
+
+  // 生成页码导航
+  function generatePagination() {
+    var pageDiv = document.getElementById('page');
+    pageDiv.innerHTML = ''; // 清空旧的页码
+
+    for (var i = 1; i <= totalPages; i++) {
+      var link = document.createElement('a');
+      link.href = '#';
+      link.textContent = i;
+      if (i === currentPage) {
+        link.classList.add('active');
+      }
+      link.onclick = function(event) {
+        event.preventDefault();
+        currentPage = parseInt(this.textContent);
+        displayData(currentPage);
+        generatePagination(); // 更新页码高亮
+      };
+      pageDiv.appendChild(link);
+    }
+  }
+
+  // 显示指定页的数据
+  function displayData(page) {
+    var startIndex = (page - 1) * perPage;
+    var endIndex = startIndex + perPage;
+    var contentDiv = document.getElementById('content');
+    contentDiv.innerHTML = '';
+
+    for (var i = startIndex; i < endIndex && i < total; i++) {
+      var p = document.createElement('p');
+      p.textContent = data[i];
+      contentDiv.appendChild(p);
+    }
+  }
+
+  // 初始化页面
+  displayData(currentPage);
+  generatePagination();
+</script>
+</body>
+</html>

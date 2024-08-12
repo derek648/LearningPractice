@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    table, table tr th, table tr td { border:1px solid #0094ff; }
+  </style>
+</head>
+<body>
+<div>
+  <label for="username">姓名:</label>
+  <input type="text" id="username" />
+  <label for="sexOne">性别:</label>
+  <input type="radio" id="sexOne" name="sex" value="男" />男
+  <input type="radio" id="sexTwo" checked name="sex" value="女" />女
+  <label for="age">年龄:</label>
+  <input type="text" id="age" />
+  <button id="add">添加</button>
+</div>
+<br/>
+<table cellspacing="0" border="1" width="600px" id="usersTable">
+  <tr>
+    <th>姓名</th>
+    <th>性别</th>
+    <th>年龄</th>
+  </tr>
+</table>
+
+<script>
+  document.getElementById('add').addEventListener('click', function () {
+    // 获取输入框中的值
+    var username = document.getElementById('username').value;
+    var sex = document.querySelector('input[name="sex"]:checked').value;
+    var age = document.getElementById('age').value;
+
+    // 检查是否有空值
+    if (!username || !age) {
+      alert('请输入完整信息！');
+      return;
+    }
+
+    // 创建一个新的表格行
+    var newRow = document.createElement('tr');
+
+    // 创建三个单元格
+    var cellUsername = document.createElement('td');
+    var cellSex = document.createElement('td');
+    var cellAge = document.createElement('td');
+
+    // 设置单元格的内容
+    cellUsername.textContent = username;
+    cellSex.textContent = sex;
+    cellAge.textContent = age;
+
+    // 将单元格添加到新行
+    newRow.appendChild(cellUsername);
+    newRow.appendChild(cellSex);
+    newRow.appendChild(cellAge);
+
+    // 将新行添加到表格
+    var table = document.getElementById('usersTable');
+    table.appendChild(newRow);
+
+    // 清空输入框
+    document.getElementById('username').value = '';
+    document.querySelector('input[name="sex"]:checked').checked = false;
+    document.getElementById('age').value = '';
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style type="text/css">
+    #topBox {
+      background: #f00;
+      position: fixed;
+      top: -100px;
+      left: 0;
+      width: 100%;
+      font-size: 50px;
+      font-weight: bold;
+      text-align: center;
+      line-height: 100px;
+    }
+    #back {
+      width: 100px;
+      height: 100px;
+      background-color: #abcdef;
+      position: fixed;
+      right: 20px;
+      bottom: 50px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+<div id="topBox">
+  顶部通栏广告
+</div>
+<p style="width:20px;">
+  锄禾日当午，汗滴禾下土。谁知盘中餐，粒粒皆辛苦。
+  床前明月光，疑是地上霜。举头望明月，低头思故乡。
+
+  离离原上草，一岁一枯荣。野火烧不尽，春风吹又生。
+</p>
+<div id="back" onclick="scrollToTop()">
+  回到顶部
+</div>
+
+<script type="text/javascript">
+  function handleScroll() {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const topBox = document.getElementById('topBox');
+    const backBtn = document.getElementById('back');
+
+    if (scrollTop >= 300) {
+      topBox.style.top = '0';
+    } else {
+      topBox.style.top = '-100px';
+    }
+
+    if (scrollTop >= 350) {
+      backBtn.style.display = 'block';
+    } else {
+      backBtn.style.display = 'none';
+    }
+  }
+
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }
+
+  // 添加滚动监听事件
+  window.addEventListener('scroll', handleScroll);
+</script>
+</body>
+</html>

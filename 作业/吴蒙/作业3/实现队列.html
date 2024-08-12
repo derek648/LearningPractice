@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+<script>
+  // 模拟最近浏览
+  var data = [];
+
+  // 浏览商品函数
+  function look(goodsId) {
+    // 如果商品ID已经在数组中，先移除
+    const index = data.indexOf(goodsId);
+    if (index > -1) {
+      data.splice(index, 1);
+    }
+
+    // 将新的或已存在的商品ID添加到数组的最前端
+    data.unshift(goodsId);
+
+    // 如果数组长度超过5，删除最后一个元素
+    if (data.length > 5) {
+      data.pop();
+    }
+
+    // 输出当前数组状态
+    console.log(data);
+  }
+
+  // 测试浏览商品
+  look(101); // 正常加入 [101]
+  look(102); // 正常加入 [102, 101]
+  look(103); // 正常加入 [103, 102, 101]
+  look(101); // 已经存在 需要修改位置 [101, 103, 102]
+  look(104); // 正常加入 [104, 101, 103, 102]
+  look(105); // 正常加入 [105, 104, 101, 103, 102]
+  look(106); // 正常加入 [106, 105, 104, 101, 103]
+
+  //  打印最终数组状态
+  console.log("最终数组状态:", data);
+</script>
+</body>
+
+</html>
