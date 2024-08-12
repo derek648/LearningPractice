@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<style type="text/css">
+			#topBox {
+				background: #f00;
+				position: fixed;
+				top: -100px;
+				left: 0;
+				width: 100%;
+				font-size: 50px;
+				font-weight: bold;
+				text-align: center;
+				line-height: 100px;
+			}
+
+			#back {
+				width: 100px;
+				height: 100px;
+				background-color: #abcdef;
+				position: fixed;
+				right: 20px;
+				bottom: 50px;
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="topBox">
+			顶部通栏广告
+		</div>
+		<p style="width:20px;">
+			锄禾日当午，汗滴禾下土。谁知盘中餐，粒粒皆辛苦。
+			床前明月光，疑是地上霜。举头望明月，低头思故乡。
+
+			离离原上草，一岁一枯荣。野火烧不尽，春风吹又生。
+		</p>
+		<div id="back">
+			回到顶部
+		</div>
+	</body>
+	<script type="text/javascript">
+		let topBox = document.getElementById("topBox")
+		let back = document.getElementById('back')
+		// 1、当滚动距离达到300px时显示出顶部公共
+		window.addEventListener('scroll', function() {
+			if (window.pageYOffset >= 300) {
+				topBox.style.display = 'inline'
+			}
+			// 2、当滚动距离达到350px是显示回到顶部
+			if (window.pageYOffset >= 350) {
+				back.style.display = 'inline'
+			}
+		})
+		// 3、当点击回到顶部 慢慢的滑动上去
+		back.addEventListener('click', function() {
+			let scroll = window.pageYOffset;
+			let interval = setInterval(function() {
+				scroll -= 10;
+				if (scroll <= 0) {
+					clearInterval(intervalId);
+				}
+				window.scrollTo(0, scroll);
+			}, 5)
+		})
+
+		// 提示：修改样式使用 dom对象.style.样式名称 = 样式值
+		// dom.style.display='block'
+	</script>
+</html>

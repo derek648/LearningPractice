@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Document</title>
+	</head>
+	<body>
+
+		<script>
+			// 生成双色球数字  红球6个 是1-33之间的数字 并且不能重复出现 蓝球1个 为1-16的数字
+			function showRedBoll() {
+				let redBolls = []
+				for (let i = 0; redBolls.length < 6; i++) {
+					let randomRedBall = Math.floor(Math.random() * 33) + 1;
+					//检测redBolls中的数字是否重复出现
+					for (let value of redBolls) {
+						if (value == randomRedBall) {
+							break;
+						} else {
+							redBolls.push(randomRedBall)
+						}
+					}
+				}
+				console.log(randomRedBall)
+			}
+
+			function showbullBoll() {
+				let bullBolls = []
+				for (let i = 0; bullBolls.length < 1; i++) {
+					let randombullBolls = Math.floor(Math.random() * 16) + 1;
+					//检测bullBolls中的数字是否重复出现
+					for (let value of bullBolls) {
+						if (value == randombullBolls) {
+							break;
+						} else {
+							bullBolls.push(randombullBolls)
+						}
+					}
+				}
+				console.log(randombullBolls)
+			}
+			showRedBoll()
+			showbullBoll()
+		</script>
+	</body>
+</html>

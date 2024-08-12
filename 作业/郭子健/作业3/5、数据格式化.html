@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Document</title>
+		<link rel="stylesheet" href="goods.css">
+
+	</head>
+
+	<body>
+		<div class="goodsinfo">
+			价格:<span>0</span>
+			<form action="" class="choose">
+				<ul>
+					<!-- 这里的li标签是最终结果 -->
+					<li class="product">
+						<dl>
+							<dt>颜色：</dt>
+							<dd><a class="selected" href="javascript:;">白色</a><a class="" href="javascript:;">黑色</a>
+							</dd>
+						</dl>
+					</li>
+					<li class="product">
+						<dl>
+							<dt>内存：</dt>
+							<dd><a class="selected" href="javascript:;">2G</a><a class="" href="javascript:;">4G</a>
+							</dd>
+						</dl>
+					</li>
+				</ul>
+			</form>
+		</div>
+		<script>
+			// data 变量表示的是服务端发给我们的商品的sku(货品)信息，根据数据 将可以选择的信息显示在ul标签中，最终显示结果  颜色：白色 黑色  内存：2G 4G 倒推
+			var data = [{
+					"id": 6,
+					"goodsSku": {
+						"颜色": "白色",
+						"内存": "2G"
+					},
+					"price": 100
+				},
+				{
+					"id": 7,
+					"goodsSku": {
+						"颜色": "白色",
+						"内存": "4G"
+					},
+					"price": 200
+				},
+				{
+					"id": 8,
+					"goodsSku": {
+						"颜色": "黑色",
+						"内存": "2G"
+					},
+					"price": 300
+				},
+				{
+					"id": 9,
+					"goodsSku": {
+						"颜色": "黑色",
+						"内存": "4G"
+					},
+					"price": 400
+				}
+			];
+			// 上面的data 数据中每一个元素表示的是一组可能的组合，如果需要将信息显示，需要对已有的data 进行整理，需要将具体有多少类型，每种类型有多少值需要整理
+			let colors = [];
+			let memories = [];
+
+			data.forEach(function(good) {
+				let color = good.goodsSku.颜色
+				let memory = good.goodsSku.内存
+				html += `<li class="product">
+						<dl>
+							<dt>颜色：</dt>
+							<dd>
+								<a class="selected" href=";">${color}</a>
+							</dd>
+						</dl>
+					</li>`;
+				html += `<li class="product">
+						<dl>
+							<dt>内存：</dt>
+							<dd>
+								<a class="selected" href=";">${memory}</a>
+							</dd>
+						</dl>
+					</li>`;
+				document.querySelector('ul').innerHTML += html;
+			});
+		</script>
+	</body>
+
+</html>
