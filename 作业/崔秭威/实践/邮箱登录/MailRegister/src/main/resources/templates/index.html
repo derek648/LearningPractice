@@ -4,96 +4,134 @@
         <meta charset="UTF-8">
         <title>注册与登录</title>
         <!--<link href="/css/index.css" rel="stylesheet"/>-->
-        <style>
-            body {
-                font-family: 'Arial', sans-serif;
-                background-image: url("/images/3d 花朵 桌面 系统 4k电脑壁纸_图片编号333231_壁纸网.jpeg");
-                background-size: contain;
-                margin: 0;
-                padding: 0;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height: 100vh;
-            }
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    background-image: url("https://th.bing.com/th/id/R.780afe4eef13856b567493fe1856d2de?rik=4kd66v3XeDVIMg&riu=http%3a%2f%2fimg.pconline.com.cn%2fimages%2fupload%2fupc%2ftx%2fwallpaper%2f1207%2f27%2fc0%2f12572201_1343370270885.jpg&ehk=gQW69JJdNImzhdCtrH57J9xmbyO3G12pIDNElSHAYoU%3d&risl=&pid=ImgRaw&r=0");
+                    background-size: cover;
+                    background-attachment: fixed;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    margin: 0;
+                    padding: 0;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    min-height: 100vh;
+                }
 
-            .container {
-                max-width: 640px;
-                width: 100%;
-                margin: auto;
-                display: flex;
-                justify-content: space-around;
-            }
+                .container {
+                    width: 80%;
+                    max-width: 500px;
+                    height: auto;
+                    margin: 50px auto;
+                    background-color: #fff;
+                    padding: 20px;
+                    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+                    border-radius: 5px;
+                    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+                }
 
-            .form-container {
-                background-color: #fff;
-                padding: 20px;
-                border-radius: 8px;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                width: 48%;
-            }
+                .container:hover {
+                    transform: translateY(-10px);
+                    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.22), 0 10px 10px rgba(0, 0, 0, 0.28);
+                }
 
-            form {
-                margin: 0;
-            }
+                .form-container {
+                    margin-bottom: 20px;
+                    opacity: 0;
+                    transform: translateY(20px);
+                    animation: fadeInDown 0.5s forwards;
+                    animation-delay: 0.3s;
+                }
 
-            .form-group {
-                margin-bottom: 15px;
-            }
+                .form-container:nth-child(2) {
+                    animation-delay: 0.6s;
+                }
 
-            label {
-                display: block;
-                margin-bottom: 5px;
-            }
+                @keyframes fadeInDown {
+                    from {
+                        opacity: 0;
+                        transform: translateY(20px);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                }
 
-            input[type="text"],
-            input[type="password"],
-            input[type="email"],
-            .login-btn {
-                width: 100%;
-                padding: 12px;
-                border: 1px solid #c5e1a5;
-                border-radius: 6px;
-                box-sizing: border-box;
-                margin-top: 10px;
-            }
+                h2 {
+                    text-align: center;
+                    color: #333;
+                    margin-bottom: 20px;
+                }
 
-            input[type="submit"],
-            .login-btn {
-                border: none;
-                cursor: pointer;
-                transition: background-color 0.3s ease;
-            }
+                .form-group {
+                    margin-bottom: 15px;
+                }
 
-            input[type="submit"] {
-                background-color: #64b5f6;
-                color: white;
-            }
+                label {
+                    display: block;
+                    margin-bottom: 5px;
+                    color: #666;
+                }
 
-            input[type="submit"]:hover {
-                background-color: #2196f3;
-            }
+                input[type="text"],
+                input[type="password"],
+                input[type="email"] {
+                    width: 100%;
+                    padding: 10px;
+                    border: 1px solid #ddd;
+                    border-radius: 3px;
+                    box-sizing: border-box;
+                    transition: border-color 0.3s, box-shadow 0.3s;
+                }
 
-            .login-btn {
-                background-color: #ffccbc;
-                color: #d84315;
-                text-align: center;
-                text-decoration: none;
-            }
+                input[type="text"]:focus,
+                input[type="password"]:focus,
+                input[type="email"]:focus {
+                    border-color: #5cb85c;
+                    box-shadow: 0 0 5px rgba(92, 184, 92, 0.4);
+                }
 
-            .login-btn:hover {
-                background-color: #ffab91;
-            }
+                input[type="submit"] {
+                    width: 100%;
+                    padding: 10px;
+                    border: none;
+                    background-color: #5cb85c;
+                    color: white;
+                    border-radius: 3px;
+                    cursor: pointer;
+                    font-size: 16px;
+                    transition: background-color 0.3s;
+                }
 
-            h2 {
-                text-align: center;
-                margin-bottom: 20px;
-            }
-        </style>
+                input[type="submit"]:hover {
+                    background-color: #4cae4c;
+                }
+
+                #switch-to-register,
+                #switch-to-login {
+                    display: inline-block;
+                    margin-right: 10px;
+                    padding: 5px 10px;
+                    border: none;
+                    background-color: #f0ad4e;
+                    color: white;
+                    border-radius: 3px;
+                    cursor: pointer;
+                    transition: background-color 0.3s;
+                }
+
+                #switch-to-register:hover,
+                #switch-to-login:hover {
+                    background-color: #eea236;
+                }
+            </style>
     </head>
     <body>
     <div class="container">
-        <div class="form-container">
+        <div class="form-container" id="register-form">
             <h2>注册</h2>
             <form action="/user/register" method="post">
                 <div class="form-group">
@@ -110,8 +148,10 @@
                 </div>
                 <input type="submit" value="注册">
             </form>
+            <button id="switch-to-login">切换到登录</button>
         </div>
-        <div class="form-container">
+
+        <div class="form-container" id="login-form">
             <h2>登录</h2>
             <form action="/user/login" method="post">
                 <div class="form-group">
@@ -124,7 +164,45 @@
                 </div>
                 <input type="submit" value="登录">
             </form>
+            <button id="switch-to-register">切换到注册</button>
         </div>
+
     </div>
+    <!--<script src="/js/toggle-forms.js"></script>-->
+    <script>
+        // 切换到注册表单
+        function switchToRegister() {
+            document.getElementById('register-form').style.display = 'block';
+            document.getElementById('login-form').style.display = 'none';
+        }
+
+        // 切换到登录表单
+        function switchToLogin() {
+            document.getElementById('register-form').style.display = 'none';
+            document.getElementById('login-form').style.display = 'block';
+        }
+
+        // 初始化函数，确保在页面加载完成后执行
+        function initFormToggler() {
+            // 获取切换按钮
+            var switchToRegisterBtn = document.getElementById('switch-to-register');
+            var switchToLoginBtn = document.getElementById('switch-to-login');
+
+            // 添加事件监听器
+            if (switchToRegisterBtn) {
+                switchToRegisterBtn.addEventListener('click', switchToRegister);
+            }
+            if (switchToLoginBtn) {
+                switchToLoginBtn.addEventListener('click', switchToLogin);
+            }
+
+            // 默认显示登录表单
+            switchToLogin();
+        }
+
+        // 当文档加载完毕时，调用初始化函数
+        document.addEventListener('DOMContentLoaded', initFormToggler);
+
+    </script>
     </body>
 </html>

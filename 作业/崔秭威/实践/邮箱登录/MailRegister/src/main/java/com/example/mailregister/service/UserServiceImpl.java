@@ -25,7 +25,8 @@ public class UserServiceImpl implements UserService {
         //主题
         String subject = "来自华夏神帝的激活邮件";
         //上面的激活码发送到用户注册邮箱
-        String context = "<a href=\"https://38b3195e.r1.cpolar.top/user/checkCode?code="+code+"\">激活请点击:"+code+"</a>";
+        String context = "您的激活码为："+code;
+        //String context = "<a href=\"http:47.96.126.180/user/checkCode?code="+code+"\">激活请点击:"+code+"</a>";
         //发送激活邮件
         mailService.sendMimeMail (user.getEmail(),subject,context);
     }
