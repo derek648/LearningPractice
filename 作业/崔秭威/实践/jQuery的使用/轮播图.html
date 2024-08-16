@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>轮播图</title>
+    <style>
+        .carousel {
+            position: relative;
+            width: 600px; /* 根据需要调整宽度 */
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .carousel-images {
+            position: relative;
+            width: 100%;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .carousel-images li {
+            position: relative;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: none;
+        }
+
+        .carousel-images li:first-child {
+            display: block;
+        }
+
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 24px;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .prev {
+            left: 10px;
+        }
+
+        .next {
+            right: 10px;
+        }
+
+    </style>
+</head>
+<body>
+    <script src="../../../../jquery3.5.1.js"></script>
+    <div class="carousel">
+        <ul class="carousel-images">
+            <li><img src="https://img.zcool.cn/community/011c795a7414dba80120a1230d0028.jpg@1280w_1l_2o_100sh.jpg" alt="图片1"></li>
+            <li><img src="https://img-baofun.zhhainiao.com/pcwallpaper_ugc/static/388379538bf2af745f3f7cfea82816a2.jpg?x-oss-process=image%2fresize%2cm_lfit%2cw_3840%2ch_2160" alt="图片2"></li>
+            <li><img src="https://youimg1.c-ctrip.com/target/100710000000qls07CC9B_D_10000_1200.jpg?proc=autoorient" alt="图片3"></li>
+            <!-- 可以根据需要添加更多图片 -->
+        </ul>
+        <a href="javascript:void(0)" class="prev">&#10094;</a>
+        <a href="javascript:void(0)" class="next">&#10095;</a>
+    </div>
+    <script>
+        $(document).ready(function(){
+            var currentIndex = 0;
+            var images = $('.carousel-images li');
+            var imageCount = images.length;
+
+            // 显示下一张图片
+            function showNextImage() {
+                images.eq(currentIndex).fadeOut(function(){
+                    currentIndex = (currentIndex + 1) % imageCount;
+                    images.eq(currentIndex).fadeIn();
+                });
+            }
+
+            // 显示上一张图片
+            function showPrevImage() {
+                images.eq(currentIndex).fadeOut(function(){
+                    currentIndex = (currentIndex - 1 + imageCount) % imageCount;
+                    images.eq(currentIndex).fadeIn();
+                });
+            }
+
+            // 点击下一张按钮
+            $('.next').click(function(){
+                showNextImage();
+            });
+
+            // 点击上一张按钮
+            $('.prev').click(function(){
+                showPrevImage();
+            });
+
+            // 自动轮播
+            setInterval(showNextImage, 3000); // 3秒切换一次
+        });
+
+    </script>
+</body>
+</html>

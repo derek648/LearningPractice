@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>登录页面</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden; /* 防止页面滚动 */
+    }
+    form {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      transition: transform 0.5s ease-in-out; /* 添加动画 */
+    }
+    form:hover {
+      transform: translateY(-10px); /* 鼠标悬停时向上移动 */
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+      animation: fadeIn 2s; /* 添加动画 */
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    div {
+      margin-bottom: 10px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #666;
+      animation: slideIn 1s forwards; /* 添加动画 */
+    }
+    @keyframes slideIn {
+      from { transform: translateX(-20px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-sizing: border-box;
+      animation: slideIn 1s forwards; /* 添加动画 */
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 4px;
+      background-color: #5cb85c;
+      color: white;
+      cursor: pointer;
+      animation: fadeIn 2s; /* 添加动画 */
+    }
+    button:hover {
+      background-color: #4cae4c;
+      animation: pulse 0.5s infinite; /* 添加动画 */
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <form @submit.prevent="login">
+    <h1>登录</h1>
+    <div>
+      <label for="username">用户名：</label>
+      <input type="text" id="username" v-model="username" required>
+    </div>
+    <div>
+      <label for="password">密码：</label>
+      <input type="password" id="password" v-model="password" required>
+    </div>
+    <div>
+      <button type="submit">登录</button>
+    </div>
+  </form>
+</div>
+
+<script src="../../../../vue.3.4.38.js"></script>
+<script>
+  const { createApp } = Vue;
+
+  createApp({
+    data() {
+      return {
+        username: '',
+        password: ''
+      };
+    },
+    methods: {
+      login() {
+        alert(`用户名：${this.username}，密码：${this.password}`);
+        this.username = '';
+        this.password = '';
+      }
+    }
+  }).mount('#app');
+</script>
+</body>
+</html>

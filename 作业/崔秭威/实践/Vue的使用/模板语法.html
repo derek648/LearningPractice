@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模板语法</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{msg}}</h1>
+        <h2>{{count+1}}</h2>
+        <h2>{{count>=10?'大于10':'小于10'}}</h2>
+    </div>
+    <script src="../../../../vue.3.4.38.js"></script>
+    <script>
+        const{createApp}=Vue3438;
+        const app=createApp({
+            data(){
+                return{
+                    msg:'踏破天地灭星辰，世间无我这般人。',
+                    count:10,
+                }
+            }
+        })
+        app.mount('#app');
+    </script>
+</body>
+</html>

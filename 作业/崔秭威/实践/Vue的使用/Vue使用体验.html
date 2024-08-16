@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue使用体验.html</title>
+</head>
+<body>
+    <script src="../../../../vue.3.4.38.js"></script>
+    <div id="app">
+        <ul>
+            <li v-for="item in users">
+                id:{{item.id}}
+                name:{{item.name}}
+                <br>
+                天不生仲尼，万古如长夜。
+            </li>
+            <button @click="changeName">变化</button>
+        </ul>
+    </div>
+    <script type="module">
+        const {createApp}=Vue3438;
+        let app = createApp({
+            data(){
+                return{
+                    users:[
+                        {
+                            id:1,
+                            name:'袁绍',
+                        },
+                        {
+                            id:2,
+                            name:'曹操',
+                        },
+                    ]
+                }
+            },
+            methods:{
+                changeName(){
+                    console.log(this);
+                    this.users[0].name='董卓'
+                }
+            }
+        })
+        app.mount('#app');
+    </script>
+
+</body>
+</html>
