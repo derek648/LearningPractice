@@ -1,0 +1,66 @@
+body {
+	background-image: linear-gradient(to bottom, #fefeff, #eef3ff);
+}
+
+/*左大框布局（包括工具栏及导航栏）*/
+.left_all {
+	background-image: linear-gradient(to bottom, #f0edf7, #e5e9f6);
+	width: 4%;
+	height: 100vh;
+	float: left;
+	overflow: hidden;
+}
+
+/*右框布局（包括对话窗口及回答窗口）*/
+.right {
+	padding-top: 200px;
+	width: 100%;
+/* 	width: 79%; */
+	height: 70vh;
+	float: right;
+	overflow-y: scroll;
+}
+.dialog {
+	/* width: 79%; */
+	width: 100%;
+	/* height: 30vh; */
+	float: right;
+}
+.right_all {
+	width: 79%;
+	height: 100vh;
+	float: right;
+}
+
+/*leftBar(written by czw)*/
+#leftBar_czw {
+	width: 20%;
+	height: 100%;
+	float: left;
+	background-color: lightskyblue;
+}
+
+/* leftMiddleBar style(written by gzj) */
+.leftMiddleBar_gzj {
+	background-image: linear-gradient(to bottom, #f0edf7, #e5e9f6);
+	width: 260px;
+	height: 100%;
+	/* border: ; */
+	float: left;
+}
+
+/* dialogBox style(written by gyt) */
+#dialogBox_gyt {
+	position: relative;
+	flex: 1;
+	/* background-image: linear-gradient(to bottom, #f0edf7, #e5e9f6); */
+	background-size: cover;
+	background-attachment: fixed;
+	display: flex;
+	flex-direction: column;
+}
+
+.bg-body-tertiary {
+	background-image: linear-gradient(to bottom, #f0edf7, #e5e9f6);
+}
+
