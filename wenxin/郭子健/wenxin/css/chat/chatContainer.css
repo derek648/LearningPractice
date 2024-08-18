@@ -1,0 +1,51 @@
+.chatContainer {
+	width: 60%;
+}
+
+.answerAndEnquiry {
+	resize: none;
+	/* 禁止用户调整textarea大小 */
+	overflow-y: hidden;
+	/* 隐藏超出部分 */
+	padding: 5px;
+	/* 文本内边距 */
+	width: calc(100% - 30px);
+	/* 减去一些空间以容纳图标和边距 */
+	flex-shrink: 0;
+	/* 防止flex容器缩小textarea */
+}
+
+.bi {
+	margin-left: 12px;
+	margin-right: 10px;
+	/* 图标和textarea之间的间距 */
+}
+
+.chatPic {
+	margin-left: 10px;
+	margin-right: 10px;
+	width: 28px;
+	height: 32px;
+	/* 图标和textarea之间的间距 */
+}
+
+.auto-height-textarea {
+	width: 100%;
+	min-height: 50px;
+	/* 最小高度 */
+	padding: 8px;
+	box-sizing: border-box;
+	resize: none;
+	/* 禁止用户调整大小 */
+	overflow-y: hidden;
+	/* 隐藏垂直滚动条 */
+	font-size: inherit;
+	line-height: inherit;
+}
+
+.containerChat {
+	width: 100%;
+	position: relative;
+	font-size: 14px;
+	line-height: 16px;
+}
