@@ -46,7 +46,7 @@
                 <h2>微信登录</h2>
                 <p>请使用微信扫描二维码登录</p>
                 <!-- 假设有一个图片链接指向微信登录的二维码 -->
-                <img src="../../../public/pictures/czw/icons/images/oC94m7YOaBjLt9IFpqqI8exz1yTM (3).jpg (3).jpg" alt="微信登录二维码">
+                <img src="../../../public/pictures/czw/icons/images/oC94m7YOaBjLt9IFpqqI8exz1yTM (8).jpg" alt="微信登录二维码">
                 <button id="switch-to-login2">切换到登录</button>
                 <button id="wechat-login">确认登录</button>
             </div>

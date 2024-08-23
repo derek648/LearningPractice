@@ -55,7 +55,7 @@ window.onload = function () {
 // AJAX请求函数，与之前定义相同
 function getRedirectUrl(callback) {
     let xhr = new XMLHttpRequest();
-    xhr.open('GET', 'https://5aee4897.r5.cpolar.top/api/test', true);
+    xhr.open('GET', 'https://c3f1c2f.r5.cpolar.top/api/test', true);
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             callback(xhr.responseText);

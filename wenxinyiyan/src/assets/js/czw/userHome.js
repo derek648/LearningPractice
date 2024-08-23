@@ -1,6 +1,6 @@
 let userid;
-let url1 = 'http://localhost:8080/api/userinfo?id=' + userid;
-let url2 = 'http://localhost:8080/api/getuserid';
+let url1 = 'https://3c827cba.r1.cpolar.top/api/userinfo?id=1';
+let url2 = 'https://3c827cba.r1.cpolar.top/api/getuserid';
 
 function getUserId() {
     let xhr = new XMLHttpRequest();
