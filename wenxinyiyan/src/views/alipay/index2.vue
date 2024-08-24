@@ -1,7 +1,8 @@
 <template>
+    <button class="show-button">开会员</button>
     <form action="https://www.baidu.com/" method="post">
         <!-- 弹窗 -->
-        <div id="membershipModal" class="modal">
+        <div id="membershipModal" class="modal"> 
         <div class="modal-content">
             <div class="plan" id="plan1">
                 <h2>月度会员</h2>
@@ -18,13 +19,30 @@
                 <p>¥288/年</p>
                 <button class="select-plan" data-plan-name="年度会员" data-plan-price="288" vip-day="365">选择</button>
             </div>
+
+            <!-- 权益说明部分 -->  
+            <div class="benefits">  
+                <h2>会员权益：</h2>  
+                <ul>                        
+                    <li><strong>优先创作支持：</strong>享受更快的AI响应速度和更优先的创作辅助，让您的创作过程更加流畅无阻。</li>  
+                    <li><strong>无限次内容生成：</strong>作为会员，您将不再受限于每日或每月的内容生成次数，尽情发挥您的创造力。</li>  
+                    <li><strong>高级模板与素材库：</strong>独家访问高级创意模板和海量精选素材库，助您轻松打造专业级内容。</li>  
+                    <li><strong>个性化内容优化建议：</strong>根据您的创作历史和偏好，提供个性化的内容优化建议，让您的作品更加出色。</li>  
+                    <li><strong>专属客服支持：</strong>享受一对一的专属客服服务，解答您在创作过程中遇到的任何问题。</li>                  
+                </ul>  
+            </div>
+
+
             <div class="payment-info">
                 <h2>支付信息</h2>
                 <p>请选择支付方式并完成支付</p>
+                <img src="../../../public/pictures/lgc/支付宝支付.png" style="width: 45px; height: 45px;">
+                <!-- <img src="../../../public/pictures/lgc/微信.png" style="width: 45px; height: 45px; "> -->
                 <button  type="submit" id="pay-button"  disabled>立即支付</button>
+                <button type="button" class="close-button">关闭</button>
             </div>
         </div>
-    </div>
+        </div>
     </form>
 </template>
 
@@ -126,8 +144,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
             if (selectedPlan) {
                 const startDate = new Date();
-                const EndDay = getendday(startDate, selectedPlan.VipDays); // 假设你已经有这个函数
-
+                const EndDay = getendday(startDate, selectedPlan.VipDays); 
+                console.log(vipId+selectedPlan.VipType+selectedPlan.Price+startDate+EndDay)
                 fetch('/users', {
                     method: 'POST',
                     headers: {
@@ -154,9 +172,33 @@ document.addEventListener('DOMContentLoaded', function() {
                         // 处理错误情况
                     });
             }
-
         });
     });
+
+
+
+    // 获取弹窗按钮和弹窗元素  
+    var showButton = document.querySelector('.show-button');  
+    var modal = document.getElementById('membershipModal');  
+  
+    // 为弹窗按钮添加点击事件监听器  
+    showButton.addEventListener('click', function() {  
+    // 显示弹窗  
+    modal.style.display = "block";  
+    });  
+
+
+    // 为关闭窗口按钮添加点击事件监听器  
+    const closeButtons = document.querySelectorAll('.close-button');  
+    closeButtons.forEach(button => {  
+        button.addEventListener('click', function() {  
+            // 隐藏弹窗  
+            const modal = document.getElementById('membershipModal');  
+            modal.style.display = "none";  
+        });  
+    });  
+
+    
 
     // 为支付按钮添加点击事件监听器
     document.getElementById('pay-button').addEventListener('click', function () {
@@ -166,15 +208,23 @@ document.addEventListener('DOMContentLoaded', function() {
         }  
     });
 });
-
 </script>
 
 
 
 <style scoped>
+/* 会员计划容器样式 */   
+  
+.plan {  
+    display: inline-block; /* 或者继续使用flex子项的属性，因为外层已经是flex容器了 */  
+    width: calc(33.333% - 20px); /* 假设你想让三个计划并排显示，减去一些间隔 */  
+    margin: 0 10px 20px; /* 上下左右都添加一些间距 */  
+    /* 其他样式保持不变 */  
+}  
+
 /* 弹窗的基础样式 */  
 .modal {  
-    /* display: none;  */
+    display: none; 
     position: fixed;  
     z-index: 1000; /* 置于更高层级以确保显示在其他内容之上 */  
     left: 0;  
@@ -194,6 +244,14 @@ document.addEventListener('DOMContentLoaded', function() {
     max-width: 600px;  
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加阴影以增强立体感 */  
     border-radius: 10px; /* 稍微增加边框圆角 */  
+
+    max-width: 800px; /* 例如，将最大宽度增加到800px */  
+    /* 或者直接设置宽度（如果不需要响应式宽度） */  
+    /* width: 70%; */  
+  
+    /* 增加左右内边距 */  
+    padding-left: 40px;  
+    padding-right: 40px; 
 }  
   
 /* 会员计划样式 */  
@@ -275,12 +333,48 @@ document.addEventListener('DOMContentLoaded', function() {
     opacity: 0.6; /* 禁用时稍微降低透明度 */  
 }
 
-.disabled-button {  
-    opacity: 0.5; /* 降低透明度 */  
-    cursor: not-allowed; /* 更改鼠标指针样式 */  
-    background-color: #ccc; /* 更改背景色 */  
-    border-color: #ccc; /* 更改边框色 */  
+/* 会员权益模块的样式 */  
+.benefits {  
+    margin-top: 20px; /* 在会员计划下方添加一些上边距 */  
+    padding: 20px; /* 为权益说明添加内边距 */  
+    border: 1px solid #ccc; /* 添加边框 */  
+    border-radius: 8px; /* 边框圆角 */  
+    background-color: #f9f9f9; /* 背景色 */  
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* 轻微的阴影效果 */  
+}  
+  
+.benefits h2 {  
+    margin-top: 0; /* 移除h2标签的上边距 */  
+    color: #333; /* 标题颜色 */  
+}  
+  
+.benefits ul {  
+    list-style-type: none; /* 移除列表项前的默认标记 */  
+    padding: 0; /* 移除默认的内边距 */  
+}  
+  
+.benefits ul li {  
+    margin-top: 8px; /* 列表项之间的间距 */  
+    line-height: 1.6; /* 行高，使文本更易读 */  
+    color: #666; /* 列表项文本颜色 */  
 }
 
-
+/* 假设这个样式表链接到了您的HTML文件中 */  
+  
+.close-button {  
+    padding: 12px 24px; /* 稍微增加内边距 */  
+    font-size: 1.1em; /* 增大字体大小 */  
+    cursor: pointer;  
+    /* 移除或修改border属性，如果您不需要边框 */  
+    /* border: 10px solid #someColor; */  
+    background-color: #097676;  
+    color: white;  
+    border-radius: 6px; /* 稍微增加圆角 */  
+    transition: background-color 0.3s, opacity 0.3s; /* 注意：opacity在这里可能没有实际作用，除非您在其他地方设置了它 */  
+    margin-left: 10px; /* 添加左边距以与旁边的按钮间隔 */  
+}  
+  
+.close-button:hover {  
+    background-color: #da190b; /* 鼠标悬停时的背景色 */  
+}
 </style>
