@@ -37,7 +37,6 @@
 //         import('../../assets/js/lgc/index2.js');
 //     }
 // }
-
 //获取会员开始日期
 function getstartday() {
     // 创建一个新的Date对象，它默认包含当前的日期和时间
