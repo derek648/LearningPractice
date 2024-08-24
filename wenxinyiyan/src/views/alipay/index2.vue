@@ -108,7 +108,10 @@ document.addEventListener('DOMContentLoaded', function() {
     selectButtons.forEach(button => {
         button.addEventListener('click', function() {
             // 禁用所有选择按钮
-            selectButtons.forEach(btn => btn.disabled = true);
+            selectButtons.forEach(btn => {  
+                btn.disabled = true;  
+                btn.classList.add('disabled-button'); // 添加禁用样式类  
+            }); 
 
             // 启用支付按钮
             const payButton = document.getElementById('pay-button');
@@ -264,10 +267,20 @@ document.addEventListener('DOMContentLoaded', function() {
     transition: background-color 0.3s, opacity 0.3s; /* 添加透明度和背景色的过渡效果 */  
 }  
   
+/**选中后其他按钮样式 */
 #pay-button:disabled {  
     background-color: #cccccc;  
     color: #666666; /* 禁用时改变文字颜色以增强可识别性 */  
     cursor: not-allowed;  
     opacity: 0.6; /* 禁用时稍微降低透明度 */  
 }
+
+.disabled-button {  
+    opacity: 0.5; /* 降低透明度 */  
+    cursor: not-allowed; /* 更改鼠标指针样式 */  
+    background-color: #ccc; /* 更改背景色 */  
+    border-color: #ccc; /* 更改边框色 */  
+}
+
+
 </style>
