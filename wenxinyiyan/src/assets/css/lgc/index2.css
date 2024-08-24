@@ -1,74 +1,101 @@
-/* 弹窗的基础样式 */
-.modal {
-    /*display: none; !* 默认隐藏 *!*/
-    position: fixed;
-    /* 固定定位 */
-    z-index: 1;
-    /* 置于顶层 */
-    left: 0;
-    top: 0;
-    width: 100%;
-    /* 宽度占满屏幕 */
-    height: 100%;
-    /* 高度占满屏幕 */
-    overflow: auto;
-    /* 如果内容太多，出现滚动条 */
-    background-color: rgb(0, 0, 0);
-    /* 背景色 */
-    background-color: rgba(0, 0, 0, 0.4);
-    /* 背景色半透明 */
-}
+/* 弹窗的基础样式 */  
+.modal {  
+    /* display: none;  */
+    position: fixed;  
+    z-index: 1000; /* 置于更高层级以确保显示在其他内容之上 */  
+    left: 0;  
+    top: 0;  
+    width: 100%;  
+    height: 100%;  
+    overflow: auto;  
+    background-color: rgba(0, 0, 0, 0.5); /* 更深的背景色以增强对比度 */  
+}  
+  
+.modal-content {  
+    background-color: #ffffff; /* 更纯净的白色背景 */  
+    margin: 10% auto; /* 稍微调整顶部距离 */  
+    padding: 30px; /* 增加内边距以增强可读性 */  
+    border: 1px solid #cccccc; /* 更浅的边框颜色 */  
+    width: 80%;  
+    max-width: 600px;  
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加阴影以增强立体感 */  
+    border-radius: 10px; /* 稍微增加边框圆角 */  
+}  
+  
+/* 会员计划样式 */  
+.plan {  
+    margin-bottom: 25px; /* 增加底部间距 */  
+    padding: 20px; /* 增加内边距 */  
+    border: 1px solid #cccccc; /* 边框颜色与modal-content一致 */  
+    border-radius: 8px; /* 圆角与modal-content稍有不同以区分 */  
+    transition: background-color 0.3s; /* 添加过渡效果以增强用户体验 */  
+    cursor: pointer;  
+}  
+  
+.plan:hover {  
+    background-color: #f0f0f0; /* 浅灰色背景以增加视觉反馈 */  
+}  
+  
+.plan h2 {  
+    color: #333333; /* 标题颜色 */  
+    font-size: 1.25em; /* 稍微增大标题字体大小 */  
+    margin-bottom: 10px; /* 标题与价格之间的间距 */  
+}  
+  
+.plan p {  
+    color: #666666; /* 价格颜色 */  
+    font-size: 1.1em; /* 稍微增大价格字体大小 */  
+    font-weight: bold; /* 加粗价格 */  
+}  
+  
+/* 选择按钮样式 */  
+.select-plan {  
+    display: inline-block; /* 使得按钮不会独占一行 */  
+    padding: 10px 20px;  
+    font-size: 1em;  
+    color: #ffffff;  
+    background-color: #007bff;  
+    border: none;  
+    border-radius: 5px;  
+    cursor: pointer;  
+    transition: background-color 0.3s; /* 过渡效果 */  
+}  
+  
+.select-plan:hover {  
+    background-color: #0056b3; /* 悬停时改变背景色 */  
+}  
 
-.modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    /* 15% 顶部距离，水平居中 */
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    /* 弹窗宽度 */
-    max-width: 600px;
-    /* 最大宽度 */
-    border-radius: 8px;
+.select-plan.selected {  
+    background-color: #28a745; /* 选中时的背景色 */  
 }
-
-/* 其他样式，如之前的.plan和.payment-info等，保持不变 */
-body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f4f4f4;
-}
-
-.plan {
-    margin-bottom: 20px;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.plan:hover {
-    background-color: #f0f0f0;
-}
-
-.payment-info {
-    margin-top: 20px;
-}
-
-#pay-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border: none;
-    background-color: #007bff;
-    color: white;
-    border-radius: 5px;
-}
-
-#pay-button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
+  
+/* 支付信息样式 */  
+.payment-info h2 {  
+    color: #333333;  
+    font-size: 1.2em;  
+    margin-bottom: 15px;  
+}  
+  
+.payment-info p {  
+    color: #666666;  
+    font-size: 1em;  
+}  
+  
+/* 支付按钮样式 */  
+#pay-button {  
+    padding: 12px 24px; /* 稍微增加内边距 */  
+    font-size: 1.1em; /* 增大字体大小 */  
+    cursor: pointer;  
+    border: none;  
+    background-color: #007bff;  
+    color: white;  
+    border-radius: 6px; /* 稍微增加圆角 */  
+    transition: background-color 0.3s, opacity 0.3s; /* 添加透明度和背景色的过渡效果 */  
+}  
+  
+#pay-button:disabled {  
+    background-color: #cccccc;  
+    color: #666666; /* 禁用时改变文字颜色以增强可识别性 */  
+    cursor: not-allowed;  
+    opacity: 0.6; /* 禁用时稍微降低透明度 */  
 }
